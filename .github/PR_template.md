@@ -10,8 +10,3 @@
 - [ ] New Feature (Alteração que adiciona uma funcionalidade)
 - [ ] Refactor (Alteração que não adiciona uma funcionalidade e nem corrige um `problema)`
 - [ ] External agent (Alteração que não afeta o código de produção)
-
-## Como a alteração foi testada?
-
-- [ ] Testes unitários
-- [ ] Testes e2e
