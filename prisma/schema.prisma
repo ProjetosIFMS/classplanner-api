@@ -14,7 +14,7 @@ model User {
   firstName  String
   lastName   String
   picture    String?
-  role       Role
+  role       ROLE
   sessions   Session[]
 }
 
@@ -29,7 +29,7 @@ model Session {
   @@map("sessions")
 }
 
-enum Role {
+enum ROLE {
   PROFESSOR
   COORDINATOR
   ADMIN
