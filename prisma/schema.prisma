@@ -8,18 +8,19 @@ datasource db {
 }
 
 model User {
-  id         String     @id @unique @default(uuid())
-  email      String     @unique
-  password   String?
-  firstName  String
-  lastName   String
-  picture    String?
-  role       Role
-  sessions   Session[]
+  id        String    @id @unique @default(uuid())
+  email     String    @unique
+  password  String?
+  firstName String
+  lastName  String
+  picture   String?
+  pivot_id  String
+  role      ROLE
+  sessions  Session[]
 }
 
 model Session {
-  id            String   @id
+  id            String   @id @unique @default(uuid())
   refresh_token String
   expires_at    DateTime
   user_id       String
@@ -29,7 +30,38 @@ model Session {
   @@map("sessions")
 }
 
-enum Role {
+model Course {
+  id                  String                @id @unique @default(uuid())
+  name                String
+  quantity_semester   Int
+  workload            Int
+  pedagogical_project pedagogical_project[]
+}
+
+model pedagogical_project {
+  id        String  @id @unique @default(uuid())
+  course_id String
+  Course    Course  @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  year      Int
+  status    Boolean
+}
+
+model Discipline {
+  id                     String @id @unique @default(uuid())
+  name                   String
+  menu                   String
+  workload               Int
+  semester               Int
+  pivot_id               String
+  pedagogical_project_id String
+}
+
+model Pivot {
+  id   String @id @unique @default(uuid())
+  name String
+}
+
+enum ROLE {
   PROFESSOR
   COORDINATOR
   ADMIN
