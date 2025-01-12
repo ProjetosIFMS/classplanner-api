@@ -1,3 +1,3 @@
-import { CreateUserDTO } from 'src/modules/user/dto/create-user.dto';
+import { CreateDisciplineDto } from './create-discipline.dto';
 
-export class UpdateDisciplineDto extends CreateUserDTO {}
+export class UpdateDisciplineDto extends CreateDisciplineDto {}
