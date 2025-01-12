@@ -14,12 +14,12 @@ model User {
   firstName String
   lastName  String
   picture   String?
-  pivot_id  String?
+  area_id   String?
   role      ROLE
   sessions  Session[]
-  Pivot     Pivot?    @relation(fields: [pivot_id], references: [id], onDelete: Cascade)
+  Area      Area?     @relation(fields: [area_id], references: [id], onDelete: Cascade)
 
-  @@index([pivot_id])
+  @@index([area_id])
 }
 
 model Session {
@@ -56,16 +56,16 @@ model Discipline {
   menu                   String
   workload               Int
   semester               Int
-  pivot_id               String
+  area_id                String
   pedagogical_project_id String
-  Pivot                  Pivot              @relation(fields: [pivot_id], references: [id], onDelete: Cascade)
+  Area                   Area               @relation(fields: [area_id], references: [id], onDelete: Cascade)
   PedagogicalProject     PedagogicalProject @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
 
-  @@index([pivot_id])
+  @@index([area_id])
   @@index([pedagogical_project_id])
 }
 
-model Pivot {
+model Area {
   id         String       @id @unique @default(uuid())
   name       String
   User       User[]
