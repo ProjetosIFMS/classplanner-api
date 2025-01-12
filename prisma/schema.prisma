@@ -17,7 +17,7 @@ model User {
   pivot_id  String?
   role      ROLE
   sessions  Session[]
-  Pivot     Pivot     @relation(fields: [pivot_id], references: [id], onDelete: Cascade)
+  Pivot     Pivot?    @relation(fields: [pivot_id], references: [id], onDelete: Cascade)
 
   @@index([pivot_id])
 }
