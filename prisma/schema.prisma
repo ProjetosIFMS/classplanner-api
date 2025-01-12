@@ -17,6 +17,9 @@ model User {
   pivot_id  String
   role      ROLE
   sessions  Session[]
+  Pivot     Pivot     @relation(fields: [pivot_id], references: [id], onDelete: Cascade)
+
+  @@index([pivot_id])
 }
 
 model Session {
@@ -31,34 +34,42 @@ model Session {
 }
 
 model Course {
-  id                  String                @id @unique @default(uuid())
+  id                  String               @id @unique @default(uuid())
   name                String
   quantity_semester   Int
   workload            Int
-  pedagogical_project pedagogical_project[]
+  pedagogicalProjects PedagogicalProject[]
 }
 
-model pedagogical_project {
-  id        String  @id @unique @default(uuid())
-  course_id String
-  Course    Course  @relation(fields: [course_id], references: [id], onDelete: Cascade)
-  year      Int
-  status    Boolean
+model PedagogicalProject {
+  id         String       @id @unique @default(uuid())
+  course_id  String
+  Course     Course       @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  year       Int
+  status     Boolean
+  Discipline Discipline[]
 }
 
 model Discipline {
-  id                     String @id @unique @default(uuid())
+  id                     String             @id @unique @default(uuid())
   name                   String
   menu                   String
   workload               Int
   semester               Int
   pivot_id               String
   pedagogical_project_id String
+  Pivot                  Pivot              @relation(fields: [pivot_id], references: [id], onDelete: Cascade)
+  PedagogicalProject     PedagogicalProject @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
+
+  @@index([pivot_id])
+  @@index([pedagogical_project_id])
 }
 
 model Pivot {
-  id   String @id @unique @default(uuid())
-  name String
+  id         String       @id @unique @default(uuid())
+  name       String
+  User       User[]
+  Discipline Discipline[]
 }
 
 enum ROLE {
