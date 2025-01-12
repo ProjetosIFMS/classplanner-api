@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,75 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @unique @default(uuid())
+  email     String    @unique
+  password  String?
+  firstName String
+  lastName  String
+  picture   String?
+  area_id   String?
+  role      ROLE
+  sessions  Session[]
+  Area      Area?     @relation(fields: [area_id], references: [id], onDelete: Cascade)
+
+  @@index([area_id])
+}
+
+model Session {
+  id            String   @id @unique @default(uuid())
+  refresh_token String
+  expires_at    DateTime
+  user_id       String
+  User          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("sessions")
+}
+
+model Course {
+  id                  String               @id @unique @default(uuid())
+  name                String
+  quantity_semester   Int
+  workload            Int
+  pedagogicalProjects PedagogicalProject[]
+}
+
+model PedagogicalProject {
+  id         String       @id @unique @default(uuid())
+  course_id  String
+  Course     Course       @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  year       Int
+  status     Boolean
+  Discipline Discipline[]
+}
+
+model Discipline {
+  id                     String             @id @unique @default(uuid())
+  name                   String
+  menu                   String
+  workload               Int
+  semester               Int
+  area_id                String
+  pedagogical_project_id String
+  Area                   Area               @relation(fields: [area_id], references: [id], onDelete: Cascade)
+  PedagogicalProject     PedagogicalProject @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
+
+  @@index([area_id])
+  @@index([pedagogical_project_id])
+}
+
+model Area {
+  id         String       @id @unique @default(uuid())
+  name       String
+  User       User[]
+  Discipline Discipline[]
+}
+
+enum ROLE {
+  PROFESSOR
+  COORDINATOR
+  ADMIN
 }
