@@ -28,7 +28,7 @@ export class CreateUserUseCase {
       this.logger.log('User created', CreateUserUseCase.name);
       return user;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad Happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error creating user',
       });

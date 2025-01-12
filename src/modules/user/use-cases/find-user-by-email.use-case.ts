@@ -22,7 +22,7 @@ export class FindUserByEmailUseCase {
       return userExists;
     } catch (error) {
       this.logger.error(error);
-      throw new NotFoundException('Users not found');
+      throw new NotFoundException('User not found');
     }
   }
 }

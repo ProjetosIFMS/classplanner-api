@@ -5,7 +5,7 @@ import { FindAllUsersRepository } from '../repository/find-all-users.repository'
 export class FindAllUsersUseCase {
   constructor(
     private readonly findAllUsersRepository: FindAllUsersRepository,
-    private readonly logger: Logger,
+    private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute() {
