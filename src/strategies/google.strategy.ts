@@ -38,6 +38,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
         lastName: name.familyName,
         picture: photos[0].value,
         role: 'PROFESSOR',
+        pivot_id: '',
       });
     }
 
