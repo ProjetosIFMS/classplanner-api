@@ -1,0 +1,17 @@
+meta {
+  name: create pivot
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/pivot
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Desenvolvimento"
+  }
+}
