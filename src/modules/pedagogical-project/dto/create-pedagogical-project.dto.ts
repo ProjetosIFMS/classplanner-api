@@ -2,7 +2,7 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreatePedagogicalProjectDto {
   @IsString()
-  id?: string;
+  id: string;
 
   @IsNotEmpty()
   @IsString()
