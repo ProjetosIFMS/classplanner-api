@@ -3,10 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { DisciplineModule } from './modules/discipline/discipline.module';
-import { AreaModule } from './modules/area/area.module';
+import { PedagogicalProjectModule } from './modules/pedagogical-project/pedagogical-project.module';
 
 @Module({
-  imports: [AuthModule, DisciplineModule, AreaModule],
+  imports: [AuthModule, DisciplineModule, PedagogicalProjectModule],
   controllers: [AppController],
   providers: [AppService],
 })
