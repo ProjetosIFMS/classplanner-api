@@ -22,7 +22,7 @@ export class DeletePedagogicalProjectUseCase {
           id,
         );
       if (!pedagogicalProjectExists) {
-        const error = new NotFoundException('Area not found');
+        const error = new NotFoundException('Pedagogical project not found');
         this.logger.error(error.message);
         throw error;
       }
@@ -39,7 +39,7 @@ export class DeletePedagogicalProjectUseCase {
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad Happened', {
         cause: err,
-        description: 'Error deleting area',
+        description: 'Error deleting pedagogical project',
       });
       this.logger.error(error.message);
       throw err;

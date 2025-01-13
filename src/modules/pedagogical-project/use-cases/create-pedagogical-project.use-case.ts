@@ -9,14 +9,16 @@ import { CreatePedagogicalProjectDto } from '../dto/create-pedagogical-project.d
 @Injectable()
 export class CreatePedagogicalProjectUseCase {
   constructor(
-    private readonly createAreaRepository: CreatePedagogicalProjectRepository,
+    private readonly createPedagogicalProjectRepository: CreatePedagogicalProjectRepository,
     private readonly logger: Logger,
   ) {}
 
   async execute(data: CreatePedagogicalProjectDto) {
     try {
       const pedagogicalProject =
-        await this.createAreaRepository.createPedagogicalProject(data);
+        await this.createPedagogicalProjectRepository.createPedagogicalProject(
+          data,
+        );
       this.logger.log(
         'Pedagogical Project created',
         CreatePedagogicalProjectUseCase.name,
@@ -25,7 +27,7 @@ export class CreatePedagogicalProjectUseCase {
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
-        description: 'Error creating area',
+        description: 'Error creating pedagogical project',
       });
       this.logger.error(error.message);
       throw err;

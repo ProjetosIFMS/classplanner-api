@@ -32,7 +32,10 @@ export class UpdatePedagogicalProjectUseCase {
           id,
           data,
         );
-      this.logger.log('Area updated', UpdatePedagogicalProjectUseCase.name);
+      this.logger.log(
+        'Pedagocical project updated',
+        UpdatePedagogicalProjectUseCase.name,
+      );
       return pedagogicalProject;
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad Happened', {
@@ -40,7 +43,7 @@ export class UpdatePedagogicalProjectUseCase {
         description: 'Error updating pedagogical project',
       });
       this.logger.error(error.message);
-      throw error;
+      throw err;
     }
   }
 }
