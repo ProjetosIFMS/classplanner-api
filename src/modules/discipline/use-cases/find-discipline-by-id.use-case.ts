@@ -1,5 +1,10 @@
 import { FindDisciplineByIdRepository } from '../repository/find-discipline-by-id.repository';
-import { Logger, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Logger,
+  Injectable,
+  NotFoundException,
+  ServiceUnavailableException,
+} from '@nestjs/common';
 
 @Injectable()
 export class FindDisciplineByIdUseCase {
@@ -20,9 +25,13 @@ export class FindDisciplineByIdUseCase {
       }
       this.logger.log('Discipline found', FindDisciplineByIdRepository.name);
       return disciplineExists;
-    } catch (error) {
-      this.logger.error(error);
-      throw new NotFoundException('Discipline not found');
+    } catch (err) {
+      new ServiceUnavailableException('Something bad happened', {
+        cause: err,
+        description: 'Error finding discipline',
+      });
+      this.logger.error(err.message);
+      throw err;
     }
   }
 }
