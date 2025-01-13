@@ -7,7 +7,8 @@ import {
   FindDisciplinesByNameUseCase,
   UpdateDisciplineUseCase,
 } from './use-cases';
-import { Prisma } from '@prisma/client';
+import { CreateDisciplineInput } from './inputs/create-discipline.input';
+import { UpdateDisciplineInput } from './inputs/update-discipline.input';
 
 @Injectable()
 export class DisciplineService {
@@ -20,7 +21,7 @@ export class DisciplineService {
     private readonly updateDisciplineUseCase: UpdateDisciplineUseCase,
   ) {}
 
-  async createDiscipline(data: Prisma.DisciplineCreateInput) {
+  async createDiscipline(data: CreateDisciplineInput) {
     return await this.createDisciplineUseCase.execute(data);
   }
 
@@ -36,7 +37,7 @@ export class DisciplineService {
     return await this.findDisciplineByNameUseCase.execute(name);
   }
 
-  async updateDiscipline(id: string, data: Prisma.DisciplineUpdateInput) {
+  async updateDiscipline(id: string, data: UpdateDisciplineInput) {
     return await this.updateDisciplineUseCase.execute(id, data);
   }
 

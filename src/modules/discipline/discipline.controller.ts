@@ -8,14 +8,15 @@ import {
   Delete,
 } from '@nestjs/common';
 import { DisciplineService } from './discipline.service';
-import { Prisma } from '@prisma/client';
+import { CreateDisciplineInput } from './inputs/create-discipline.input';
+import { UpdateDisciplineInput } from './inputs/update-discipline.input';
 
 @Controller('discipline')
 export class DisciplineController {
   constructor(private readonly disciplineService: DisciplineService) {}
 
   @Post()
-  create(@Body() data: Prisma.DisciplineCreateInput) {
+  create(@Body() data: CreateDisciplineInput) {
     return this.disciplineService.createDiscipline(data);
   }
 
@@ -35,7 +36,7 @@ export class DisciplineController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: Prisma.DisciplineUpdateInput) {
+  update(@Param('id') id: string, @Body() data: UpdateDisciplineInput) {
     return this.disciplineService.updateDiscipline(id, data);
   }
 
