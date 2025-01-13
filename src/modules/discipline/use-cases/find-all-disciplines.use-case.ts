@@ -1,4 +1,8 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  ServiceUnavailableException,
+} from '@nestjs/common';
 import { FindAllDisciplinesRepository } from '../repository/find-all-disciplines.repository';
 
 @Injectable()
@@ -11,9 +15,13 @@ export class FindAllDisciplinesUseCase {
   async execute() {
     try {
       return await this.findAllDisciplinesRepository.findAllDisciplines();
-    } catch (error) {
-      this.logger.error(error);
-      throw new NotFoundException('Disciplines not found.');
+    } catch (err) {
+      new ServiceUnavailableException('Something bad happened', {
+        cause: err,
+        description: 'Error finding disciplines',
+      });
+      this.logger.error(err);
+      throw err;
     }
   }
 }

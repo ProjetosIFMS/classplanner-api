@@ -33,12 +33,12 @@ export class UpdateDisciplineUseCase {
       this.logger.log('Discipline updated', UpdateDisciplineUseCase.name);
       return discipline;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error updating discipline',
       });
-      this.logger.error(error.message);
-      throw error;
+      this.logger.error(err.message);
+      throw err;
     }
   }
 }

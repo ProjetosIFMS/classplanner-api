@@ -28,12 +28,12 @@ export class DeleteDisciplineUseCase {
       this.logger.log('Discipline deleted.', DeleteDisciplineUseCase.name);
       return discipline;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error deleting discipline',
       });
-      this.logger.error(error.message);
-      throw error;
+      this.logger.error(err.message);
+      throw err;
     }
   }
 }
