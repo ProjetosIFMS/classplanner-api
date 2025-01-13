@@ -1,0 +1,17 @@
+meta {
+  name: list pivots
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/area
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Desenvolvimento"
+  }
+}

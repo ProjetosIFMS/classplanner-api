@@ -1,0 +1,17 @@
+meta {
+  name: delete pivot
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{base_url}}/area/2a4d9bde-de07-4b50-a8df-705c948aba3c
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Desenvolvimento"
+  }
+}
