@@ -23,4 +23,8 @@ export class CreateDisciplineDto {
   @IsNotEmpty()
   @IsString()
   pedagogical_project_id: string;
+
+  @IsNotEmpty()
+  @IsString()
+  area_id: string;
 }

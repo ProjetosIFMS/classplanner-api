@@ -6,7 +6,7 @@ export class FindDisciplineByNameRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findDisciplineByName(name: string) {
-    return await this.prisma.discipline.findMany({
+    return await this.prisma.discipline.findFirst({
       where: {
         name: {
           contains: name,

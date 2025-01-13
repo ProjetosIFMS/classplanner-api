@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { UpdateDisciplineRepository } from '../repository/update-discipline.repository';
 import { FindDisciplineByIdRepository } from '../repository/find-discipline-by-id.repository';
-import { Prisma } from '@prisma/client';
+import { UpdateDisciplineInput } from '../inputs/update-discipline.input';
 
 @Injectable()
 export class UpdateDisciplineUseCase {
@@ -16,7 +16,7 @@ export class UpdateDisciplineUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(id: string, data: Prisma.DisciplineUpdateInput) {
+  async execute(id: string, data: UpdateDisciplineInput) {
     try {
       const disciplineExists =
         await this.findDisciplineByIdRepository.FindDisciplineById(id);
