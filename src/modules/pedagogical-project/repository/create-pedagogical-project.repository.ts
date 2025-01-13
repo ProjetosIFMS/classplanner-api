@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePedagogicalProjectInput } from '../inputs/create-pedagogical-project';
+import { CreatePedagogicalProjectInput } from '../inputs/create-pedagogical-project.input';
 import { PrismaService } from '../../../shared/databases/prisma.database';
 
 @Injectable()
