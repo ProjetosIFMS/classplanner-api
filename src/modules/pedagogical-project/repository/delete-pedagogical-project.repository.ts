@@ -6,7 +6,7 @@ export class DeletePedagogicalProjectRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async deletePedagogicalProject(id: string) {
-    const pedagogicalProject = await this.prisma.area.delete({
+    const pedagogicalProject = await this.prisma.pedagogicalProject.delete({
       where: { id },
     });
     return pedagogicalProject;

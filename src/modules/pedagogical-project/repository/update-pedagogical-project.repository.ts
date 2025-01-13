@@ -10,10 +10,10 @@ export class UpdatePedagogicalProjectRepository {
     id: string,
     data: UpdatePedagogicalProjectInput,
   ) {
-    const area = await this.prisma.area.update({
+    const pedagogicalProject = await this.prisma.pedagogicalProject.update({
       where: { id },
       data,
     });
-    return area;
+    return pedagogicalProject;
   }
 }
