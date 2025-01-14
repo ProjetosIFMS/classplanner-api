@@ -1,4 +1,4 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Logger, Module, forwardRef } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { config } from 'dotenv';
 import { AuthController } from './auth.controller';
@@ -18,7 +18,7 @@ config();
     forwardRef(() => UserModule),
   ],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy, JwtStrategy],
+  providers: [AuthService, GoogleStrategy, JwtStrategy, Logger],
   exports: [],
 })
 export class AuthModule {}
