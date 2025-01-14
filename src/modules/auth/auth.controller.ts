@@ -6,7 +6,7 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Auth')
 @Controller('google')
 export class AuthController {
-  constructor(private readonly appService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Get()
   @UseGuards(AuthGuard('google'))
@@ -15,11 +15,6 @@ export class AuthController {
   @Get('redirect')
   @UseGuards(AuthGuard('google'))
   googleAuthRedirect(@Req() req, @Res() res) {
-    this.appService.generateJwt(req.user);
-    const user = req.user;
-    const accessToken = this.appService.generateJwt(user);
-    res.redirect(
-      `${process.env.FRONTEND_URL}/auth/callback?access_token=${accessToken}`,
-    );
+    return this.authService.googleLogin(req, res);
   }
 }
