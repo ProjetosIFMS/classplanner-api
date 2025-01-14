@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { CreateDisciplineRepository } from '../repository/create-discipline.repository';
 import { FindDisciplineByNameRepository } from '../repository/find-discipline-by-name.repository';
-import { CreateDisciplineInput } from '../inputs/create-discipline.input';
+import { CreateDisciplineDto } from '../dto/create-discipline.dto';
 
 @Injectable()
 export class CreateDisciplineUseCase {
@@ -16,7 +16,7 @@ export class CreateDisciplineUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(data: CreateDisciplineInput) {
+  async execute(data: CreateDisciplineDto) {
     try {
       const disciplineExists =
         await this.findDisciplineByNameRepository.findDisciplineByName(

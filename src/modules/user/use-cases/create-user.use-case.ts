@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client';
 import {
+  ConflictException,
   Injectable,
   Logger,
   ServiceUnavailableException,
@@ -21,7 +22,7 @@ export class CreateUserUseCase {
         data.email,
       );
       if (userExists) {
-        throw new Error('User already exists');
+        throw new ConflictException('User already exists');
       }
 
       const user = await this.createUserRepository.createUser(data);
