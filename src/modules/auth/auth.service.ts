@@ -32,7 +32,7 @@ export class AuthService {
     }
   }
 
-  googleLogin(req) {
+  async googleLogin(req, res) {
     if (!req.user) {
       return 'No user from google';
     }
@@ -42,10 +42,7 @@ export class AuthService {
       sub: req.user.id,
     };
 
-    return {
-      message: 'User information from google',
-      user: req.user,
-      access_token: this.jwtService.sign(payload),
-    };
+    const accessToken = this.jwtService.sign(payload);
+    res.redirect(`${process.env.FRONTEND_CALLBACK_GOOGLE_URL}${accessToken}`);
   }
 }
