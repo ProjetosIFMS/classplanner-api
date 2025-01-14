@@ -7,8 +7,8 @@ import {
   FindDisciplinesByNameUseCase,
   UpdateDisciplineUseCase,
 } from './use-cases';
-import { CreateDisciplineInput } from './inputs/create-discipline.input';
-import { UpdateDisciplineInput } from './inputs/update-discipline.input';
+import { CreateDisciplineDto } from './dto/create-discipline.dto';
+import { UpdateDisciplineDto } from './dto/update-discipline.dto';
 
 @Injectable()
 export class DisciplineService {
@@ -21,7 +21,7 @@ export class DisciplineService {
     private readonly updateDisciplineUseCase: UpdateDisciplineUseCase,
   ) {}
 
-  async createDiscipline(data: CreateDisciplineInput) {
+  async createDiscipline(data: CreateDisciplineDto) {
     return await this.createDisciplineUseCase.execute(data);
   }
 
@@ -37,7 +37,7 @@ export class DisciplineService {
     return await this.findDisciplineByNameUseCase.execute(name);
   }
 
-  async updateDiscipline(id: string, data: UpdateDisciplineInput) {
+  async updateDiscipline(id: string, data: UpdateDisciplineDto) {
     return await this.updateDisciplineUseCase.execute(id, data);
   }
 
