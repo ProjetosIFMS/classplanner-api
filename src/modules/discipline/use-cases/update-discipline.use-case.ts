@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { UpdateDisciplineRepository } from '../repository/update-discipline.repository';
 import { FindDisciplineByIdRepository } from '../repository/find-discipline-by-id.repository';
-import { UpdateDisciplineInput } from '../inputs/update-discipline.input';
+import { UpdateDisciplineDto } from '../dto/update-discipline.dto';
 
 @Injectable()
 export class UpdateDisciplineUseCase {
@@ -16,7 +16,7 @@ export class UpdateDisciplineUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(id: string, data: UpdateDisciplineInput) {
+  async execute(id: string, data: UpdateDisciplineDto) {
     try {
       const disciplineExists =
         await this.findDisciplineByIdRepository.FindDisciplineById(id);

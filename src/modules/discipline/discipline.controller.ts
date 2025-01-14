@@ -8,15 +8,17 @@ import {
   Delete,
 } from '@nestjs/common';
 import { DisciplineService } from './discipline.service';
-import { CreateDisciplineInput } from './inputs/create-discipline.input';
-import { UpdateDisciplineInput } from './inputs/update-discipline.input';
+import { CreateDisciplineDto } from './dto/create-discipline.dto';
+import { UpdateDisciplineDto } from './dto/update-discipline.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Discipline')
 @Controller('discipline')
 export class DisciplineController {
   constructor(private readonly disciplineService: DisciplineService) {}
 
   @Post()
-  create(@Body() data: CreateDisciplineInput) {
+  create(@Body() data: CreateDisciplineDto) {
     return this.disciplineService.createDiscipline(data);
   }
 
@@ -36,7 +38,7 @@ export class DisciplineController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: UpdateDisciplineInput) {
+  update(@Param('id') id: string, @Body() data: UpdateDisciplineDto) {
     return this.disciplineService.updateDiscipline(id, data);
   }
 

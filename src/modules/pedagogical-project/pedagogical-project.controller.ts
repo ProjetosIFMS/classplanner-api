@@ -10,7 +10,9 @@ import {
 import { PedagogicalProjectService } from './pedagogical-project.service';
 import { CreatePedagogicalProjectDto } from './dto/create-pedagogical-project.dto';
 import { UpdatePedagogicalProjectDto } from './dto/update-pedagogical-project.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Pedagogical Project')
 @Controller('pedagogical-project')
 export class PedagogicalProjectController {
   constructor(
