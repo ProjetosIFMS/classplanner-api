@@ -10,6 +10,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDTO } from './dto/create-user.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -17,7 +18,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() data: Prisma.UserCreateInput) {
+  create(@Body() data: CreateUserDTO) {
     return this.userService.createUser(data);
   }
 
