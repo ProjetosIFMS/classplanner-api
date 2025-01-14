@@ -4,6 +4,7 @@ import { config } from 'dotenv';
 import { Injectable } from '@nestjs/common';
 import { CreateUserRepository } from '../modules/user/repository/create-user.repository';
 import { FindUserByEmailRepository } from '../modules/user/repository/find-user-by-email.repository';
+import { AuthService } from '../modules/auth/auth.service';
 
 config();
 
@@ -12,6 +13,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(
     private readonly createUserRepository: CreateUserRepository,
     private readonly findUserByEmailRepository: FindUserByEmailRepository,
+    private readonly authService: AuthService,
   ) {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -27,20 +29,26 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     profile: any,
     done: VerifyCallback,
   ): Promise<any> {
-    const { name, emails, photos } = profile;
-    const email = emails[0].value;
-    let user = await this.findUserByEmailRepository.findUserByEmail(email);
+    try {
+      const googleUser =
+        await this.authService.validateGoogleAccessToken(accessToken);
 
-    if (!user) {
-      user = await this.createUserRepository.createUser({
-        email,
-        firstName: name.givenName,
-        lastName: name.familyName,
-        picture: photos[0].value,
-        role: 'PROFESSOR',
-      });
+      const email = googleUser.email;
+      let user = await this.findUserByEmailRepository.findUserByEmail(email);
+
+      if (!user) {
+        user = await this.createUserRepository.createUser({
+          email,
+          firstName: googleUser.given_name,
+          lastName: googleUser.family_name,
+          picture: googleUser.picture,
+          role: 'PROFESSOR',
+        });
+      }
+
+      done(null, user);
+    } catch (error) {
+      done(error, false);
     }
-
-    done(null, user);
   }
 }
