@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import {
   ConflictException,
   Injectable,
@@ -7,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserRepository } from '../repository/create-user.repository';
 import { FindUserByEmailRepository } from '../repository/find-user-by-email.repository';
+import { CreateUserDTO } from '../dto/create-user.dto';
 
 @Injectable()
 export class CreateUserUseCase {
@@ -16,7 +16,7 @@ export class CreateUserUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(data: Prisma.UserCreateInput) {
+  async execute(data: CreateUserDTO) {
     try {
       const userExists = await this.findUserByEmailRepository.findUserByEmail(
         data.email,
