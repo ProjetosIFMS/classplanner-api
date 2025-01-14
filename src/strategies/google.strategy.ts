@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserRepository } from '../modules/user/repository/create-user.repository';
 import { FindUserByEmailRepository } from '../modules/user/repository/find-user-by-email.repository';
 import { AuthService } from '../modules/auth/auth.service';
+import { Role } from '../modules/user/dto/Role';
 
 config();
 
@@ -42,7 +43,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
           firstName: googleUser.given_name,
           lastName: googleUser.family_name,
           picture: googleUser.picture,
-          role: 'PROFESSOR',
+          role: Role.PROFESSOR,
         });
       }
 

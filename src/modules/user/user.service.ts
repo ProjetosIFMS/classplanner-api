@@ -8,6 +8,7 @@ import {
   FindUserByIdUseCase,
   UpdateUserUseCase,
 } from './use-cases';
+import { CreateUserDTO } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -19,7 +20,7 @@ export class UserService {
     private readonly updateUserUseCase: UpdateUserUseCase,
     private readonly findAllUsersUseCase: FindAllUsersUseCase,
   ) {}
-  async createUser(data: Prisma.UserCreateInput) {
+  async createUser(data: CreateUserDTO) {
     return await this.createUserUseCase.execute(data);
   }
 
