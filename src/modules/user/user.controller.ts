@@ -6,14 +6,21 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { Role } from './dto/Role';
+import { Roles } from '../../decorators/roles.decorator';
+import { RolesGuard } from '../../guards/roles.guard';
 
 @ApiTags('User')
 @Controller('user')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles(Role.COORDINATOR)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -23,6 +30,7 @@ export class UserController {
   }
 
   @Get()
+  @Roles(Role.PROFESSOR)
   async findAll() {
     return await this.userService.findAll();
   }
