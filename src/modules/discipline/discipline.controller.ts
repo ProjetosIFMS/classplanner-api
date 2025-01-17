@@ -6,14 +6,21 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { DisciplineService } from './discipline.service';
 import { CreateDisciplineDto } from './dto/create-discipline.dto';
 import { UpdateDisciplineDto } from './dto/update-discipline.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from '../user/dto/Role';
 
 @ApiTags('Discipline')
 @Controller('discipline')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles(Role.COORDINATOR)
 export class DisciplineController {
   constructor(private readonly disciplineService: DisciplineService) {}
 
@@ -23,6 +30,7 @@ export class DisciplineController {
   }
 
   @Get()
+  @Roles(Role.PROFESSOR)
   findAll() {
     return this.disciplineService.findAll();
   }
