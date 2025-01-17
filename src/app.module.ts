@@ -8,7 +8,7 @@ import { CourseModule } from './modules/course/course.module';
 import { AreaModule } from './modules/area/area.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
-import { AuthGuard } from '@nestjs/passport';
+import { ConditionalAuthGuard } from './guards/conditional-auth.guard';
 
 @Module({
   imports: [
@@ -23,7 +23,7 @@ import { AuthGuard } from '@nestjs/passport';
     AppService,
     {
       provide: APP_GUARD,
-      useClass: AuthGuard('jwt'),
+      useClass: ConditionalAuthGuard,
     },
     {
       provide: APP_GUARD,
