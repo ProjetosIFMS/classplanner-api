@@ -1,11 +1,11 @@
 meta {
-  name: list area
+  name: update user area
   type: http
-  seq: 2
+  seq: 3
 }
 
-get {
-  url: {{base_url}}/area
+patch {
+  url: {{base_url}}/user/update-area
   body: json
   auth: bearer
 }
@@ -16,6 +16,6 @@ auth:bearer {
 
 body:json {
   {
-    "name": "Desenvolvimento"
+    "area_id":"9ab1c373-dbe5-4dfc-910a-8ea541d59a3c"
   }
 }

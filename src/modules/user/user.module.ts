@@ -10,6 +10,8 @@ import { UserService } from './user.service';
 import * as UseCases from './use-cases';
 import { UserController } from './user.controller';
 import { SharedModule } from '../../shared/databases/shared.module';
+import { UpdateUserAreaRepository } from './repository/update-user-area.repository';
+import { FindAreaByIdRepository } from '../area/repository/find-area-by-id.repository';
 
 const usecases = Object.values(UseCases);
 
@@ -23,6 +25,8 @@ const usecases = Object.values(UseCases);
     FindUserByEmailRepository,
     FindUserByIdRepository,
     UpdateUserRepository,
+    UpdateUserAreaRepository,
+    FindAreaByIdRepository,
     UserService,
     ...usecases,
     Logger,
