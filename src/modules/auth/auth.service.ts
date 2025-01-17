@@ -10,7 +10,11 @@ export class AuthService {
   ) {}
 
   generateJwt(user: any) {
-    const payload = { username: user.email, sub: user.id };
+    const payload = {
+      username: user.email,
+      sub: user.id,
+      role: user.role,
+    };
     return this.jwtService.sign(payload);
   }
 
@@ -32,17 +36,21 @@ export class AuthService {
     }
   }
 
-  async googleLogin(req, res) {
+  googleLogin(req) {
     if (!req.user) {
-      return 'No user from google';
+      return 'No user from Google';
     }
 
     const payload = {
       username: req.user.email,
       sub: req.user.id,
+      role: req.user.role,
     };
 
-    const accessToken = this.jwtService.sign(payload);
-    res.redirect(`${process.env.FRONTEND_CALLBACK_GOOGLE_URL}${accessToken}`);
+    return {
+      message: 'User information from Google',
+      user: req.user,
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }

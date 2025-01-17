@@ -1,9 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { RolesGuard } from './guards/roles.guard';
+import { Reflector } from '@nestjs/core';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalGuards(new RolesGuard(new Reflector()));
   app.enableCors();
 
   const config = new DocumentBuilder()
