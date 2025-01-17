@@ -9,6 +9,7 @@ import {
   UpdateUserUseCase,
 } from './use-cases';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { UpdateUserAreaUseCase } from './use-cases/update-user-area.use-case';
 
 @Injectable()
 export class UserService {
@@ -19,6 +20,7 @@ export class UserService {
     private readonly deleteUserUseCase: DeleteUserUseCase,
     private readonly updateUserUseCase: UpdateUserUseCase,
     private readonly findAllUsersUseCase: FindAllUsersUseCase,
+    private readonly updateUserAreaUseCase: UpdateUserAreaUseCase,
   ) {}
   async createUser(data: CreateUserDTO) {
     return await this.createUserUseCase.execute(data);
@@ -42,5 +44,9 @@ export class UserService {
 
   async deleteUser(id: string) {
     return await this.deleteUserUseCase.execute(id);
+  }
+
+  async updateUserArea(userId: string, role: string, area_id: string) {
+    return await this.updateUserAreaUseCase.execute(userId, role, area_id);
   }
 }
