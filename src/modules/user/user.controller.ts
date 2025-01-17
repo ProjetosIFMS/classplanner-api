@@ -47,9 +47,7 @@ export class UserController {
     return this.userService.FindUserByEmail(email);
   }
 
-  @Patch('update-area')
-  @Roles(Role.PROFESSOR)
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Patch('select-area')
   @Roles(Role.PROFESSOR)
   async updateUserArea(
     @Req() req,
