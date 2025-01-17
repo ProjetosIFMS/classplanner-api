@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { UserService } from './user.service';
@@ -16,6 +17,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Role } from './dto/Role';
 import { Roles } from '../../decorators/roles.decorator';
 import { RolesGuard } from '../../guards/roles.guard';
+import { UpdateUserAreaDto } from './dto/update-user-area.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -43,6 +45,24 @@ export class UserController {
   @Get(':email')
   findByEmail(@Param('email') email: string) {
     return this.userService.FindUserByEmail(email);
+  }
+
+  @Patch('update-area')
+  @Roles(Role.PROFESSOR)
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.PROFESSOR)
+  async updateUserArea(
+    @Req() req,
+    @Body() updateUserAreaDto: UpdateUserAreaDto,
+  ) {
+    const userId = req.user.id;
+    const role = req.user.role;
+
+    return this.userService.updateUserArea(
+      userId,
+      role,
+      updateUserAreaDto.area_id,
+    );
   }
 
   @Patch(':id')
