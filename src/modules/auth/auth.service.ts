@@ -11,9 +11,12 @@ export class AuthService {
 
   generateJwt(user: any) {
     const payload = {
-      username: user.email,
       sub: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
       role: user.role,
+      picture: user.picture,
     };
     return this.jwtService.sign(payload);
   }
