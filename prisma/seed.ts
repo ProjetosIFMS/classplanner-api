@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 
 export enum Role {
   COORDINATOR = 'COORDINATOR',
+  ADMIN = 'ADMIN',
 }
 
 async function main() {
@@ -80,6 +81,18 @@ async function main() {
       firstName: 'INFO',
       lastName: 'COINF',
       role: Role.COORDINATOR,
+    },
+    {
+      email: 'dirge.tl@ifms.edu.br',
+      firstName: 'DIRETOR GERAL',
+      lastName: 'DIRGE',
+      role: Role.ADMIN,
+    },
+    {
+      email: 'diren.tl@ifms.edu.br',
+      firstName: 'DIRETOR DE ENSINO',
+      lastName: 'DIREN',
+      role: Role.ADMIN,
     },
   ];
 
