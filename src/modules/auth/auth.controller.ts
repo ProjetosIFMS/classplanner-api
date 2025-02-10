@@ -37,6 +37,7 @@ export class AuthController {
       lastName: req.user.lastName,
       role: req.user.role,
       picture: req.user.picture,
+      area_id: req.user.area_id,
     };
   }
 }

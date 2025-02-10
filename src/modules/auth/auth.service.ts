@@ -17,6 +17,7 @@ export class AuthService {
       lastName: user.lastName,
       role: user.role,
       picture: user.picture,
+      area_id: user.area_id,
     };
     return this.jwtService.sign(payload);
   }
@@ -45,9 +46,13 @@ export class AuthService {
     }
 
     const payload = {
-      username: req.user.email,
       sub: req.user.id,
+      username: req.user.email,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
       role: req.user.role,
+      picture: req.user.picture,
+      area_id: req.user.area_id,
     };
 
     return {
