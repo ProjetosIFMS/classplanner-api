@@ -5,4 +5,5 @@ export type UpdateDisciplineInput = {
   area_id: string;
   semester: number;
   pedagogical_project_id: string;
+  modality_id: string;
 };
