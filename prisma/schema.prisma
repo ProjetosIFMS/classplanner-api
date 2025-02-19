@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id        String    @id @unique @default(uuid())
-  email     String    @unique
-  password  String?
-  firstName String
-  lastName  String
-  picture   String?
-  area_id   String?
-  role      ROLE
-  sessions  Session[]
-  Area      Area?     @relation(fields: [area_id], references: [id], onDelete: Cascade)
+  id                  String                @id @unique @default(uuid())
+  email               String                @unique
+  password            String?
+  firstName           String
+  lastName            String
+  picture             String?
+  area_id             String?
+  role                ROLE
+  sessions            Session[]
+  Area                Area?                 @relation(fields: [area_id], references: [id], onDelete: Cascade)
+  ProfessorClassGrade ProfessorClassGrade[]
 
   @@index([area_id])
 }
@@ -39,6 +40,7 @@ model Course {
   quantity_semester   Int
   workload            Int
   pedagogicalProjects PedagogicalProject[]
+  classGrade          ClassGrade[]
 }
 
 model PedagogicalProject {
@@ -48,21 +50,91 @@ model PedagogicalProject {
   year       Int
   status     Boolean
   Discipline Discipline[]
+  ClassGrade ClassGrade[]
 }
 
 model Discipline {
-  id                     String             @id @unique @default(uuid())
+  id                     String                 @id @unique @default(uuid())
   name                   String
   menu                   String
   workload               Int
   semester               Int
   area_id                String
   pedagogical_project_id String
-  Area                   Area               @relation(fields: [area_id], references: [id], onDelete: Cascade)
-  PedagogicalProject     PedagogicalProject @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
+  Area                   Area                   @relation(fields: [area_id], references: [id], onDelete: Cascade)
+  PedagogicalProject     PedagogicalProject     @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
+  Modality               Modality?              @relation(fields: [modalityId], references: [id])
+  modalityId             String?
+  DisciplineModality     DisciplineModality[]
+  ClassGrade             ClassGradeDiscipline[]
 
   @@index([area_id])
   @@index([pedagogical_project_id])
+}
+
+model Modality {
+  id                   String                 @id @unique @default(uuid())
+  name                 String
+  classGrade           ClassGrade[]
+  Discipline           Discipline[]
+  DisciplineModality   DisciplineModality[]
+  ClassGradeDiscipline ClassGradeDiscipline[]
+}
+
+model DisciplineModality {
+  id            String     @id @unique @default(uuid())
+  discipline_id String
+  modality_id   String
+  period_id     String
+  Period        Period     @relation(fields: [period_id], references: [id], onDelete: Cascade)
+  Discipline    Discipline @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
+  Modality      Modality   @relation(fields: [modality_id], references: [id], onDelete: Cascade)
+}
+
+model ProfessorClassGrade {
+  id            String     @id @unique @default(uuid())
+  user_id       String
+  classGrade_id String
+  priority      Boolean
+  Professor     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  ClassGrade    ClassGrade @relation(fields: [classGrade_id], references: [id], onDelete: Cascade)
+}
+
+model Period {
+  id                   String                 @id @unique @default(uuid())
+  name                 String
+  start_date           DateTime
+  end_date             DateTime
+  ClassGradeDiscipline ClassGradeDiscipline[]
+  DisciplineModality   DisciplineModality[]
+}
+
+model ClassGrade {
+  id                     String                 @id @unique @default(uuid())
+  year                   Int
+  semester               Int
+  course_id              String
+  course                 Course                 @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  pedagogical_project_id String
+  pedagogical_project    PedagogicalProject     @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
+  disciplines            ClassGradeDiscipline[]
+  modality               Modality[]
+  ProfessorClassGrade    ProfessorClassGrade[]
+}
+
+model ClassGradeDiscipline {
+  id            String     @id @unique @default(uuid())
+  classGrade_id String
+  discipline_id String
+  modality_id   String
+  period_id     String
+  Period        Period     @relation(fields: [period_id], references: [id], onDelete: Cascade)
+  Modality      Modality   @relation(fields: [modality_id], references: [id], onDelete: Cascade)
+  ClassGrade    ClassGrade @relation(fields: [classGrade_id], references: [id], onDelete: Cascade)
+  Discipline    Discipline @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
+
+  @@index([classGrade_id])
+  @@index([discipline_id])
 }
 
 model Area {
