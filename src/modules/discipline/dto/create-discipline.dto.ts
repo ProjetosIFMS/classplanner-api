@@ -35,4 +35,8 @@ export class CreateDisciplineDto {
   @IsNotEmpty()
   @IsString()
   area_id: string;
+
+  @ApiProperty()
+  @IsString()
+  modality_id: string;
 }
