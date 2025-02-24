@@ -10,6 +10,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { ConditionalAuthGuard } from './guards/conditional-auth.guard';
 import { PeriodModule } from './modules/period/period.module';
+import { ClassgradeDisciplineModule } from './modules/classgrade-discipline/classgrade-discipline.module';
+import { ProfessorClassgradeModule } from './professor-classgrade/professor-classgrade.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { PeriodModule } from './modules/period/period.module';
     AreaModule,
     CourseModule,
     PeriodModule,
+    ClassgradeDisciplineModule,
+    ProfessorClassgradeModule,
   ],
   controllers: [AppController],
   providers: [
