@@ -63,8 +63,8 @@ model Discipline {
   pedagogical_project_id String
   Area                   Area                   @relation(fields: [area_id], references: [id], onDelete: Cascade)
   PedagogicalProject     PedagogicalProject     @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
-  Modality               Modality?              @relation(fields: [modalityId], references: [id])
-  modalityId             String?
+  Modality               Modality?              @relation(fields: [modality_id], references: [id])
+  modality_id             String?
   DisciplineModality     DisciplineModality[]
   ClassGrade             ClassGradeDiscipline[]
 
