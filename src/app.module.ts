@@ -11,6 +11,7 @@ import { RolesGuard } from './guards/roles.guard';
 import { ConditionalAuthGuard } from './guards/conditional-auth.guard';
 import { PeriodModule } from './modules/period/period.module';
 import { ModalityModule } from './modules/modality/modality.module';
+import { ClassgradeModule } from './modules/class-grade/classgrade.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ModalityModule } from './modules/modality/modality.module';
     CourseModule,
     PeriodModule,
     ModalityModule,
+    ClassgradeModule,
   ],
   controllers: [AppController],
   providers: [
