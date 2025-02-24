@@ -1,21 +1,15 @@
 meta {
-  name: create modality
+  name: list modality
   type: http
-  seq: 1
+  seq: 2
 }
 
-post {
+get {
   url: {{base_url}}/modality
-  body: json
+  body: none
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmQ0MWJmMy01ZWFhLTRmNzktODMwZC1kMzE1MjYzYzY2ZGUiLCJlbWFpbCI6Im1pc2FlbC5zaWx2YUBlc3R1ZGFudGUuaWZtcy5lZHUuYnIiLCJmaXJzdE5hbWUiOiJNaXNhZWwiLCJsYXN0TmFtZSI6IkhlbnJpcXVlIiwicm9sZSI6IkNPT1JESU5BVE9SIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tYTE9mQ3BJRTRUQVB5VjQ2VVdtMkp5ZUp2T1ZwTEdESGJGVmV1Q28yOFRBMFlYWDQ9czk2LWMiLCJhcmVhX2lkIjpudWxsLCJpYXQiOjE3NDA0MjE1MjIsImV4cCI6MTc0MDUwNzkyMn0.Qg-W4Zu6VFdyD-RoDwkio2ItggmlZ6G_Fu0Ns00Cps0
-}
-
-body:json {
-  {
-    "name": "Eletiva"
-  }
 }
