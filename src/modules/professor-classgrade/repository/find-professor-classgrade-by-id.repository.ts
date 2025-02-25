@@ -6,7 +6,7 @@ export class FindProfessorClassgradeByIdRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findById(id: string) {
-    const professor = this.prisma.professorClassGrade.findUnique({
+    const professor = await this.prisma.professorClassGrade.findUnique({
       where: { id },
     });
     return professor;

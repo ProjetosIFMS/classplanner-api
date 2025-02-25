@@ -20,7 +20,7 @@ import { UpdateProfessorClassgradeDto } from './dto/update-professor-classgrade.
 @ApiTags('professor-classgrade')
 @Controller('professor-classgrade')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+@Roles(Role.COORDINATOR, Role.PROFESSOR)
 export class ProfessorClassgradeController {
   constructor(
     private readonly professorClassgradeService: ProfessorClassgradeService,
@@ -49,17 +49,5 @@ export class ProfessorClassgradeController {
   @Get()
   findAll() {
     return this.professorClassgradeService.findAllProfessorsClassgrades();
-  }
-
-  @Get(':classGrade_id')
-  findByClassgradeId(@Param('id') classGrade_id: string) {
-    return this.findByClassgradeId(classGrade_id);
-  }
-
-  @Get(':user_id')
-  findByProfessorId(@Param('user_id') user_id: string) {
-    return this.professorClassgradeService.findProfessorClassgradeByProfessorId(
-      user_id,
-    );
   }
 }

@@ -20,7 +20,10 @@ export class DeleteProfessorClassgradeUseCase {
       const relationExists =
         this.findProfessorClassgradeByIdRepository.findById(id);
       if (!relationExists) {
-        new NotFoundException('Professor related to classgrade not found');
+        throw new NotFoundException(
+          'Professor related to classgrade not found',
+          DeleteProfessorClassgradeUseCase.name,
+        );
       }
       const deletedProfessor =
         this.deleteProfessorClassgradeRepository.deleteProfessorClassgrade(id);
