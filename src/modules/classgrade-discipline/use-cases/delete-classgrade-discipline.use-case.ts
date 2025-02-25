@@ -30,13 +30,17 @@ export class DeleteClassgradeDisciplineUseCase {
         await this.deleteClassgradeDisciplineRepository.DeleteClassgradeDiscipline(
           id,
         );
-      this.logger.log('Related discipline to classgrade deleted');
+      this.logger.log(
+        'Related discipline to classgrade deleted',
+        DeleteClassgradeDisciplineUseCase.name,
+      );
       return classgradeDiscipline;
     } catch (err) {
       new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error deleting discipline related to classgrade',
       });
+      throw err;
     }
   }
 }
