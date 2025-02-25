@@ -13,8 +13,7 @@ import { PeriodModule } from './modules/period/period.module';
 import { ModalityModule } from './modules/modality/modality.module';
 import { ClassgradeModule } from './modules/class-grade/classgrade.module';
 import { ClassgradeDisciplineModule } from './modules/classgrade-discipline/classgrade-discipline.module';
-import { ProfessorClassgradeModule } from './professor-classgrade/professor-classgrade.module';
-
+import { ProfessorClassgradeModule } from './modules/professor-classgrade/professor-classgrade.module';
 
 @Module({
   imports: [

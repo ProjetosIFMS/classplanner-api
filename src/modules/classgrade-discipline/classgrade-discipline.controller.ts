@@ -17,8 +17,8 @@ import { ClassgradeDisciplineService } from './classgrade-discipline.service';
 import { CreateClassgradeDisciplineDto } from './dto/create-classgrade-discipline.dto';
 import { UpdateClassgradeDisciplineDto } from './dto/update-classgrade-discipline.dto';
 
-@ApiTags('ClassgradeDiscipline')
-@Controller('ClassgradeDiscipline')
+@ApiTags('classgrade-discipline')
+@Controller('classgrade-discipline')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Roles(Role.COORDINATOR)
 export class ClassgradeDisciplineController {
@@ -47,25 +47,11 @@ export class ClassgradeDisciplineController {
   @Get()
   @Roles(Role.PROFESSOR)
   findAll() {
-    return this.classgradeDisciplineService.findAllClassgradeDisciplines;
+    return this.classgradeDisciplineService.findAllClassgradeDisciplines();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.classgradeDisciplineService.findClassgradeDisciplineById(id);
-  }
-
-  @Get(':classGrade_id')
-  findByClassgradeId(@Param('classGrade_id') classGrade_id: string) {
-    return this.classgradeDisciplineService.findClassgradeDisciplineByClassgradeId(
-      classGrade_id,
-    );
-  }
-
-  @Get(':period_id')
-  findByPeriodId(@Param('period_id') period_id: string) {
-    return this.classgradeDisciplineService.findClassgradeDisciplineByPeriodId(
-      period_id,
-    );
   }
 }
