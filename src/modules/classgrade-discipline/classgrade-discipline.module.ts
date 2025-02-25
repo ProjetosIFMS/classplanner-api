@@ -5,23 +5,24 @@ import { DeleteClassgradeDisciplineRepository } from './repository/delete-classg
 import { UpdateClassgradeDisciplineRepository } from './repository/update-classgrade-discipline.repository';
 import { FindAllClassgradeDisciplinesRepository } from './repository/find-all-classgrade-disciplines.repository';
 import { FindClassgradeDisciplineByIdRepository } from './repository/find-classgrade-discipline-by-id.repository';
-import { FindClassgradeDisciplineByClassGradeIdRepository } from './repository/find-classgrade-discipline-by-classgrade-id.repository';
-import { FindClassgradeDisciplineByPeriodIdRepository } from './repository/find-classgrade-discipline-by-period-id.repository';
 import { ClassgradeDisciplineService } from './classgrade-discipline.service';
 import { ClassgradeDisciplineController } from './classgrade-discipline.controller';
+import { ClassgradeModule } from '../class-grade/classgrade.module';
+import { DisciplineModule } from '../discipline/discipline.module';
+import { ModalityModule } from '../modality/modality.module';
+import { PeriodModule } from '../period/period.module';
 
 const usecases = Object.values(UseCases);
 
 @Module({
   controllers: [ClassgradeDisciplineController],
+  imports: [ClassgradeModule, DisciplineModule, ModalityModule, PeriodModule],
   providers: [
     CreateClassgradeDisciplneRepository,
     DeleteClassgradeDisciplineRepository,
     UpdateClassgradeDisciplineRepository,
     FindAllClassgradeDisciplinesRepository,
     FindClassgradeDisciplineByIdRepository,
-    FindClassgradeDisciplineByClassGradeIdRepository,
-    FindClassgradeDisciplineByPeriodIdRepository,
     ClassgradeDisciplineService,
     ...usecases,
     Logger,
@@ -32,8 +33,6 @@ const usecases = Object.values(UseCases);
     UpdateClassgradeDisciplineRepository,
     FindAllClassgradeDisciplinesRepository,
     FindClassgradeDisciplineByIdRepository,
-    FindClassgradeDisciplineByClassGradeIdRepository,
-    FindClassgradeDisciplineByPeriodIdRepository,
   ],
 })
 export class ClassgradeDisciplineModule {}
