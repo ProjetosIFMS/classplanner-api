@@ -30,7 +30,7 @@ export class CourseController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR)
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAllCourses() {
     return this.courseService.findAllCourses();
   }
