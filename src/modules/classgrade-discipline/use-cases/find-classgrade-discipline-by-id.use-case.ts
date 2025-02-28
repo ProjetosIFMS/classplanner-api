@@ -26,8 +26,8 @@ export class FindClassgradeDisciplineByIdUseCase {
         throw error;
       }
       this.logger.log(
-        'Discipline found',
-        FindClassgradeDisciplineByIdRepository.name,
+        'Discipline alocated in classgrade found',
+        FindClassgradeDisciplineByIdUseCase.name,
       );
       return disciplineAlocated;
     } catch (err) {

@@ -3,9 +3,7 @@ import {
   CreateClassgradeDisciplineUseCase,
   DeleteClassgradeDisciplineUseCase,
   FindAllClassgradeDisciplinesUseCase,
-  FindClassgradeDisciplineByClassgradeIdUseCase,
   FindClassgradeDisciplineByIdUseCase,
-  FindClassgradeDisciplineByPeriodIdUseCase,
   UpdateClassgradeDisciplineUseCase,
 } from './use-cases';
 import { CreateClassgradeDisciplineDto } from './dto/create-classgrade-discipline.dto';
@@ -19,8 +17,6 @@ export class ClassgradeDisciplineService {
     private readonly updateClassgradeDisciplineUseCase: UpdateClassgradeDisciplineUseCase,
     private readonly findAllClassgradeDisciplinesUseCase: FindAllClassgradeDisciplinesUseCase,
     private readonly findClassgradeDisciplineByIdUseCase: FindClassgradeDisciplineByIdUseCase,
-    private readonly findClassgradeDisciplineByClassgradeIdUseCase: FindClassgradeDisciplineByClassgradeIdUseCase,
-    private readonly findClassgradeDisciplineByPeriodIdUseCase: FindClassgradeDisciplineByPeriodIdUseCase,
   ) {}
 
   async createClassgradeDiscipline(data: CreateClassgradeDisciplineDto) {
@@ -44,17 +40,5 @@ export class ClassgradeDisciplineService {
 
   async findClassgradeDisciplineById(id: string) {
     return await this.findClassgradeDisciplineByIdUseCase.execute(id);
-  }
-
-  async findClassgradeDisciplineByClassgradeId(classgrade_id: string) {
-    return await this.findClassgradeDisciplineByClassgradeIdUseCase.execute(
-      classgrade_id,
-    );
-  }
-
-  async findClassgradeDisciplineByPeriodId(period_id: string) {
-    return await this.findClassgradeDisciplineByPeriodIdUseCase.execute(
-      period_id,
-    );
   }
 }

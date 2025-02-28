@@ -17,8 +17,8 @@ import { ProfessorClassgradeService } from './professor-classgrade.service';
 import { CreateProfessorClassGradeDto } from './dto/create-professor-classgrade.dto';
 import { UpdateProfessorClassgradeDto } from './dto/update-professor-classgrade.dto';
 
-@ApiTags('ProfessorClassgrade')
-@Controller('ProfessorClassgrade')
+@ApiTags('professor-classgrade')
+@Controller('professor-classgrade')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Roles(Role.COORDINATOR)
 export class ProfessorClassgradeController {
@@ -47,9 +47,8 @@ export class ProfessorClassgradeController {
   }
 
   @Get()
-  @Roles(Role.COORDINATOR)
   findAll() {
-    return this.professorClassgradeService.findAllProfessorsClassgrades;
+    return this.professorClassgradeService.findAllProfessorsClassgrades();
   }
 
   @Get(':classGrade_id')

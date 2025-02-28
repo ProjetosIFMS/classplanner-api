@@ -9,11 +9,14 @@ import { FindProfessorClassgradeByIdRepository } from './repository/find-profess
 import { FindProfessorClassgradeByProfessorIdRepository } from './repository/find-professor-classgrade-by-professor-id.repository';
 import { FindProfessorClassgradeByClassgradeIdRepository } from './repository/find-professor-classgrade-by-classgrade-id.repository';
 import { ProfessorClassgradeService } from './professor-classgrade.service';
+import { ClassgradeModule } from '../class-grade/classgrade.module';
+import { UserModule } from '../user/user.module';
 
 const usecases = Object.values(UseCases);
 
 @Module({
   controllers: [ProfessorClassgradeController],
+  imports: [ClassgradeModule, UserModule],
   providers: [
     CreateProfessorClassGradeRepository,
     UpdateProfessorClassgradeRepository,

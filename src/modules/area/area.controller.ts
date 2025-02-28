@@ -17,7 +17,7 @@ import { RolesGuard } from '../../guards/roles.guard';
 import { Roles } from '../../decorators/roles.decorator';
 import { Role } from '../user/dto/Role';
 
-@ApiTags('Area')
+@ApiTags('area')
 @Controller('area')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Roles(Role.COORDINATOR)

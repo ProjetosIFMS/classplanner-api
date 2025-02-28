@@ -1,37 +1,38 @@
 import {
-  ConflictException,
   Injectable,
   Logger,
+  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { CreateClassgradeDisciplneRepository } from '../repository/create-classgrade-discipline.repository';
-import { FindClassgradeDisciplineByPeriodIdRepository } from '../repository/find-classgrade-discipline-by-period-id.repository';
 import { CreateClassgradeDisciplineDto } from '../dto/create-classgrade-discipline.dto';
-import { FindClassgradeDisciplineByClassGradeIdRepository } from '../repository/find-classgrade-discipline-by-classgrade-id.repository';
+import { FindClassGradeByIdRepository } from 'src/modules/class-grade/repository/find-classgrade-by-id.repository';
+import { FindDisciplineByIdRepository } from 'src/modules/discipline/repository/find-discipline-by-id.repository';
 
 @Injectable()
 export class CreateClassgradeDisciplineUseCase {
   constructor(
     private readonly createClassgradeDisciplineRepository: CreateClassgradeDisciplneRepository,
-    private readonly findClassgradeDisciplineByPeriodIdRepository: FindClassgradeDisciplineByPeriodIdRepository,
-    private readonly findClassgradeDisciplineByClassgradeIdRepository: FindClassgradeDisciplineByClassGradeIdRepository,
+    private readonly findClassgradeByIdRepository: FindClassGradeByIdRepository,
+    private readonly findDisciplineByIdRepository: FindDisciplineByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute(data: CreateClassgradeDisciplineDto) {
     try {
-      const disciplineAlocated =
-        (await this.findClassgradeDisciplineByPeriodIdRepository.FindByPeriodId(
-          data.period_id,
-        )) &&
-        (await this.findClassgradeDisciplineByClassgradeIdRepository.FindByClassgrade(
-          data.classGrade_id,
-        ));
-
-      if (disciplineAlocated) {
-        throw new ConflictException(
-          'Discipline already alocated in Classgrade',
+      const disciplineExists =
+        this.findDisciplineByIdRepository.FindDisciplineById(
+          data.discipline_id,
         );
+      const classGradeExists =
+        this.findClassgradeByIdRepository.findClassGradeById(
+          data.classGrade_id,
+        );
+
+      const relationCanExists = disciplineExists && classGradeExists;
+
+      if (!relationCanExists) {
+        throw new NotFoundException('Discipline or classgrade not found');
       }
 
       const classgradeDiscipline =
@@ -49,8 +50,8 @@ export class CreateClassgradeDisciplineUseCase {
         cause: err,
         description: 'Error alocating discipline into classgrade',
       });
-      this.logger.error(err.mesage);
-      throw new err();
+      this.logger.error(err.message);
+      throw err;
     }
   }
 }

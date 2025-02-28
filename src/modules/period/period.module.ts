@@ -22,5 +22,12 @@ const usecases = Object.values(UseCases);
     ...usecases,
     Logger,
   ],
+  exports: [
+    CreatePeriodRepository,
+    FindAllPeriodsRepository,
+    FindPeriodByIdRepository,
+    DeletePeriodRepository,
+    UpdatePeriodRepository,
+  ],
 })
 export class PeriodModule {}
