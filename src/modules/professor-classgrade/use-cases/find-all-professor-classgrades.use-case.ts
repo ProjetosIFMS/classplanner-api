@@ -19,7 +19,7 @@ export class FindAllProfessorClassgradesUseCase {
         this.findAllProfessorClassgradesRepository.findAllProfessorsClassgrades();
 
       if (!professorsClassgrades) {
-        new NotFoundException(
+        throw new NotFoundException(
           'Relation of professors with classgrades not found',
         );
       }

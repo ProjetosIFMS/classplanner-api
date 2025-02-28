@@ -6,7 +6,8 @@ export class FindAllProfessorsClassgradesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAllProfessorsClassgrades() {
-    const professorsClassgrades = this.prisma.professorClassGrade.findMany();
+    const professorsClassgrades =
+      await this.prisma.professorClassGrade.findMany();
     return professorsClassgrades;
   }
 }

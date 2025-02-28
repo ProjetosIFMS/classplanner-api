@@ -27,7 +27,10 @@ export class CreateProfessorClassgradeUseCase {
         );
 
       if (!userExists || !classGradeExists) {
-        new NotFoundException('Professor or classgrade not found.');
+        throw new NotFoundException(
+          'Professor or classgrade not found.',
+          CreateProfessorClassgradeUseCase.name,
+        );
       }
 
       const professorClassgrade =

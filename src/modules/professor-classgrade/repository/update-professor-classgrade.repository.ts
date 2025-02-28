@@ -10,7 +10,7 @@ export class UpdateProfessorClassgradeRepository {
     id: string,
     data: UpdateProfessorClassgradeInput,
   ) {
-    const professor = this.prisma.professorClassGrade.update({
+    const professor = await this.prisma.professorClassGrade.update({
       where: {
         id,
       },

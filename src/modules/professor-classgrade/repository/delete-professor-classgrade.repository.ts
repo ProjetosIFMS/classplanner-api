@@ -6,7 +6,7 @@ export class DeleteProfessorClassgradeRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async deleteProfessorClassgrade(id: string) {
-    const professor = this.prisma.professorClassGrade.delete({
+    const professor = await this.prisma.professorClassGrade.delete({
       where: { id },
     });
     return professor;

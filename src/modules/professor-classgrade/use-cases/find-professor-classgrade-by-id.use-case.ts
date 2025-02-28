@@ -21,7 +21,7 @@ export class FindProfessorClassgradeByIdUseCase {
         );
 
       if (!relationExists) {
-        new NotFoundException(
+        throw new NotFoundException(
           'Relation between professor and classgrade not found',
         );
       }

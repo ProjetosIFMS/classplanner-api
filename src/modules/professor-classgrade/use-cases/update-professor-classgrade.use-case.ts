@@ -22,20 +22,12 @@ export class UpdateProfessorClassgradeUseCase {
 
   async execute(id: string, data: UpdateProfessorClassgradeDto) {
     try {
-      const userExists = this.findUserByIdRepository.findUserById(data.user_id);
-      const classgradeExists =
-        this.findClassgradeByIdRepository.findClassGradeById(
-          data.classGrade_id,
-        );
-
-      if (!userExists || !classgradeExists) {
-        new NotFoundException('User or classgrade not found.');
-      }
-
       const professorClassgradeExists =
         this.findProfessorClassgradeByIdRepository.findById(id);
       if (!professorClassgradeExists) {
-        new NotFoundException('Professor related to classgrade not found');
+        throw new NotFoundException(
+          'Professor related to classgrade not found',
+        );
       }
 
       const professorClassgrade =

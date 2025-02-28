@@ -4,9 +4,7 @@ import {
   CreateProfessorClassgradeUseCase,
   DeleteProfessorClassgradeUseCase,
   FindAllProfessorClassgradesUseCase,
-  FindProfessorClassgradeByClassgradeIdUseCase,
   FindProfessorClassgradeByIdUseCase,
-  FindProfessorClassgradeByProfessorIdUseCase,
   UpdateProfessorClassgradeUseCase,
 } from './use-cases';
 import { UpdateProfessorClassgradeDto } from './dto/update-professor-classgrade.dto';
@@ -19,8 +17,6 @@ export class ProfessorClassgradeService {
     private readonly deleteProfessorClassgradeUseCase: DeleteProfessorClassgradeUseCase,
     private readonly findAllProfessorsClassgradesUseCase: FindAllProfessorClassgradesUseCase,
     private readonly findProfessorClassgradeByIdUseCase: FindProfessorClassgradeByIdUseCase,
-    private readonly findProfessorClassgradeByProfessorIdUseCase: FindProfessorClassgradeByProfessorIdUseCase,
-    private readonly findProfessorClassgradeByClassgradeIdUseCase: FindProfessorClassgradeByClassgradeIdUseCase,
   ) {}
 
   async createProfessorClassgrade(data: CreateProfessorClassGradeDto) {
@@ -44,17 +40,5 @@ export class ProfessorClassgradeService {
 
   async findProfessorClassgradeById(id: string) {
     return await this.findProfessorClassgradeByIdUseCase.execute(id);
-  }
-
-  async findProfessorClassgradeByClassgradeId(classgrade_id: string) {
-    return await this.findProfessorClassgradeByClassgradeIdUseCase.execute(
-      classgrade_id,
-    );
-  }
-
-  async findProfessorClassgradeByProfessorId(user_id: string) {
-    return await this.findProfessorClassgradeByProfessorIdUseCase.execute(
-      user_id,
-    );
   }
 }

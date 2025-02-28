@@ -6,8 +6,6 @@ import { UpdateProfessorClassgradeRepository } from './repository/update-profess
 import { DeleteProfessorClassgradeRepository } from './repository/delete-professor-classgrade.repository';
 import { FindAllProfessorsClassgradesRepository } from './repository/find-all-professors-classgrades.repository';
 import { FindProfessorClassgradeByIdRepository } from './repository/find-professor-classgrade-by-id.repository';
-import { FindProfessorClassgradeByProfessorIdRepository } from './repository/find-professor-classgrade-by-professor-id.repository';
-import { FindProfessorClassgradeByClassgradeIdRepository } from './repository/find-professor-classgrade-by-classgrade-id.repository';
 import { ProfessorClassgradeService } from './professor-classgrade.service';
 import { ClassgradeModule } from '../class-grade/classgrade.module';
 import { UserModule } from '../user/user.module';
@@ -23,8 +21,6 @@ const usecases = Object.values(UseCases);
     DeleteProfessorClassgradeRepository,
     FindAllProfessorsClassgradesRepository,
     FindProfessorClassgradeByIdRepository,
-    FindProfessorClassgradeByProfessorIdRepository,
-    FindProfessorClassgradeByClassgradeIdRepository,
     ProfessorClassgradeService,
     ...usecases,
     Logger,
@@ -35,8 +31,6 @@ const usecases = Object.values(UseCases);
     DeleteProfessorClassgradeRepository,
     FindAllProfessorsClassgradesRepository,
     FindProfessorClassgradeByIdRepository,
-    FindProfessorClassgradeByProfessorIdRepository,
-    FindProfessorClassgradeByClassgradeIdRepository,
   ],
 })
 export class ProfessorClassgradeModule {}

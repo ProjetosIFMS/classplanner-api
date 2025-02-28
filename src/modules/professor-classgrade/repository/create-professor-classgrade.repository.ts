@@ -7,7 +7,7 @@ export class CreateProfessorClassGradeRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async createProfessorClassGrade(data: CreateProfessorClassgradeInput) {
-    const professorClassgrade = this.prisma.professorClassGrade.create({
+    const professorClassgrade = await this.prisma.professorClassGrade.create({
       data,
     });
     return professorClassgrade;
