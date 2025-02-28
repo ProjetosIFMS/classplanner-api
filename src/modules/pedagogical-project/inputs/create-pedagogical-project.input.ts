@@ -3,4 +3,8 @@ export type CreatePedagogicalProjectInput = {
   course_id: string;
   year: number;
   status: boolean;
+  hasTCC: boolean;
+  description: string;
+  stageHours: number;
+  complementaryHours: number;
 };
