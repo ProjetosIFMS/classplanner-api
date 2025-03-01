@@ -7,17 +7,21 @@ import { FindPedagogicalProjectByIdRepository } from './repository/find-pedagogi
 import { PedagogicalProjectService } from './pedagogical-project.service';
 import { FindAllPedagogicalProjectsRepository } from './repository/find-all-pedagogical-project.repository';
 import { UpdatePedagogicalProjectRepository } from './repository/update-pedagogical-project.repository';
+import { FindPedagogicalProjectsByCourseIdRepository } from './repository/find-pedagogical-projects-by-course-id.repository';
+import { CourseModule } from '../course/course.module';
 
 const usecases = Object.values(UseCases);
 
 @Module({
   controllers: [PedagogicalProjectController],
+  imports: [CourseModule],
   providers: [
     CreatePedagogicalProjectRepository,
     FindPedagogicalProjectByIdRepository,
     FindAllPedagogicalProjectsRepository,
     DeletePedagogicalProjectRepository,
     UpdatePedagogicalProjectRepository,
+    FindPedagogicalProjectsByCourseIdRepository,
     PedagogicalProjectService,
     ...usecases,
     Logger,

@@ -22,5 +22,6 @@ const usecases = Object.values(UseCases);
     ...usecases,
     Logger,
   ],
+  exports: [FindCourseByIdRepository, FindAllCoursesRepository],
 })
 export class CourseModule {}
