@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreatePedagogicalProjectDto {
   @ApiProperty()
@@ -20,4 +26,24 @@ export class CreatePedagogicalProjectDto {
   @IsNotEmpty()
   @IsBoolean()
   status: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  @IsNotEmpty()
+  hasTCC: boolean;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  description: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  stageHours: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  complementaryHours: number;
 }

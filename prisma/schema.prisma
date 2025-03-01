@@ -44,13 +44,17 @@ model Course {
 }
 
 model PedagogicalProject {
-  id         String       @id @unique @default(uuid())
-  course_id  String
-  Course     Course       @relation(fields: [course_id], references: [id], onDelete: Cascade)
-  year       Int
-  status     Boolean
-  Discipline Discipline[]
-  ClassGrade ClassGrade[]
+  id                 String       @id @unique @default(uuid())
+  course_id          String
+  Course             Course       @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  year               Int
+  status             Boolean
+  Discipline         Discipline[]
+  ClassGrade         ClassGrade[]
+  hasTCC             Boolean
+  description        String
+  stageHours         Int
+  complementaryHours Int
 }
 
 model Discipline {
@@ -64,7 +68,7 @@ model Discipline {
   Area                   Area                   @relation(fields: [area_id], references: [id], onDelete: Cascade)
   PedagogicalProject     PedagogicalProject     @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
   Modality               Modality?              @relation(fields: [modality_id], references: [id])
-  modality_id             String?
+  modality_id            String?
   DisciplineModality     DisciplineModality[]
   ClassGrade             ClassGradeDiscipline[]
 
