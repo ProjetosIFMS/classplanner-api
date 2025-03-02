@@ -4,6 +4,7 @@ import {
   DeletePedagogicalProjectUseCase,
   FindAllPedagogicalProjectsUseCase,
   FindPedagogicalProjectByIdUseCase,
+  FindPedagogicalProjectsByCourseIdUseCase,
   UpdatePedagogicalProjectUseCase,
 } from './use-cases';
 import { CreatePedagogicalProjectDto } from './dto/create-pedagogical-project.dto';
@@ -15,6 +16,7 @@ export class PedagogicalProjectService {
     private readonly createPedagogicalProjectUseCase: CreatePedagogicalProjectUseCase,
     private readonly findAllPedagogicalProjectsUseCase: FindAllPedagogicalProjectsUseCase,
     private readonly findPedagogicalProjectByIdUseCase: FindPedagogicalProjectByIdUseCase,
+    private readonly findPedagogicalProjectsByCourseIdUseCase: FindPedagogicalProjectsByCourseIdUseCase,
     private readonly updatePedagogicalProjectUseCase: UpdatePedagogicalProjectUseCase,
     private readonly deletePedagogicalProjectUseCase: DeletePedagogicalProjectUseCase,
   ) {}
@@ -46,5 +48,11 @@ export class PedagogicalProjectService {
 
   async deletePedagogicalProject(id: string) {
     return await this.deletePedagogicalProjectUseCase.execute(id);
+  }
+
+  async findPedagogicalProjectsByCourseId(course_id: string) {
+    return await this.findPedagogicalProjectsByCourseIdUseCase.execute(
+      course_id,
+    );
   }
 }

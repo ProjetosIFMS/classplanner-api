@@ -28,7 +28,7 @@ export class FindAllPedagogicalProjectsUseCase {
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad Happened', {
         cause: err,
-        description: 'Error deleting pedagogical project',
+        description: 'Error finding pedagogical projects',
       });
       this.logger.error(error.message);
       throw err;

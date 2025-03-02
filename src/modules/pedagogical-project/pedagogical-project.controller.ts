@@ -36,9 +36,17 @@ export class PedagogicalProjectController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR)
-  async findAllPedagogicalProjects() {
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  findAllPedagogicalProjects() {
     return this.pedagogicalProjectService.findAllPedagogicalProjects();
+  }
+
+  @Get(':course_id')
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  findPedagogicalProjectsByCourseId(@Param('course_id') course_id: string) {
+    return this.pedagogicalProjectService.findPedagogicalProjectsByCourseId(
+      course_id,
+    );
   }
 
   @Get(':id')
