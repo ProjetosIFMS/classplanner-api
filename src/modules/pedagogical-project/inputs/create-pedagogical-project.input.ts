@@ -7,4 +7,6 @@ export type CreatePedagogicalProjectInput = {
   description: string;
   stageHours: number;
   complementaryHours: number;
+  extensionCourses: number;
+  workload: number;
 };
