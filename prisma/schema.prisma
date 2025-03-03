@@ -53,8 +53,10 @@ model PedagogicalProject {
   ClassGrade         ClassGrade[]
   hasTCC             Boolean
   description        String
+  workload           Int
   stageHours         Int
   complementaryHours Int
+  extensionCourses Int
 }
 
 model Discipline {

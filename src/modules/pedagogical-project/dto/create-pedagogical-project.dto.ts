@@ -46,4 +46,14 @@ export class CreatePedagogicalProjectDto {
   @IsNumber()
   @IsNotEmpty()
   complementaryHours: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  extensionCourses: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  workload: number;
 }
