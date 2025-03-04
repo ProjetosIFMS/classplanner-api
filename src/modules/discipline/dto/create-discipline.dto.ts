@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateDisciplineDto {
   @ApiProperty()
@@ -10,16 +10,6 @@ export class CreateDisciplineDto {
   @IsNotEmpty()
   @IsString()
   name: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  menu: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsNumber()
-  workload: number;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -39,4 +29,27 @@ export class CreateDisciplineDto {
   @ApiProperty()
   @IsString()
   modality_id: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  course_id: string;
+
+  @ApiProperty()
+  @IsString()
+  code: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  practicalHours: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  theoreticalHours: number;
+
+  @ApiProperty()
+  @IsNumber()
+  extensionHours: number;
 }
