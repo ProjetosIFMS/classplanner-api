@@ -1,10 +1,13 @@
 export type CreateDisciplineInput = {
   id: string;
   name: string;
-  menu: string;
-  workload: number;
   area_id: string;
-  semester: number;
   pedagogical_project_id: string;
+  course_id: string;
+  semester: number;
   modality_id: string;
+  code: string;
+  practicalHours: number;
+  theoreticalHours: number;
+  extensionHours: number;
 };

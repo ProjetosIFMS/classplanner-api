@@ -30,7 +30,7 @@ export class ModalityController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR)
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAll() {
     return this.modalityService.findAll();
   }

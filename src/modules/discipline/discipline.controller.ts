@@ -35,6 +35,11 @@ export class DisciplineController {
     return this.disciplineService.findAll();
   }
 
+  @Get(':course_id')
+  findByCourseId(@Param('course_id') course_id: string) {
+    return this.disciplineService.findDisciplinesByCourseId(course_id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.disciplineService.findDisciplineById(id);

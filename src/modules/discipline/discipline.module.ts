@@ -8,11 +8,14 @@ import { FindAllDisciplinesRepository } from './repository/find-all-disciplines.
 import { FindDisciplineByIdRepository } from './repository/find-discipline-by-id.repository';
 import { FindDisciplineByNameRepository } from './repository/find-discipline-by-name.repository';
 import * as UseCases from './use-cases';
+import { CourseModule } from '../course/course.module';
+import { FindDisciplinesByCourseIdRepository } from './repository/find-disciplines-by-course-id.repository';
 
 const usecases = Object.values(UseCases);
 
 @Module({
   controllers: [DisciplineController],
+  imports: [CourseModule],
   providers: [
     CreateDisciplineRepository,
     DeleteDisciplineRepository,
@@ -20,6 +23,7 @@ const usecases = Object.values(UseCases);
     FindAllDisciplinesRepository,
     FindDisciplineByIdRepository,
     FindDisciplineByNameRepository,
+    FindDisciplinesByCourseIdRepository,
     DisciplineService,
     ...usecases,
     Logger,
@@ -31,6 +35,7 @@ const usecases = Object.values(UseCases);
     FindAllDisciplinesRepository,
     FindDisciplineByIdRepository,
     FindDisciplineByNameRepository,
+    FindDisciplinesByCourseIdRepository,
   ],
 })
 export class DisciplineModule {}

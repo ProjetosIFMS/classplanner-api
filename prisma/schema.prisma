@@ -39,6 +39,7 @@ model Course {
   name                String
   quantity_semester   Int
   workload            Int
+  disciplines         Discipline[]
   pedagogicalProjects PedagogicalProject[]
   classGrade          ClassGrade[]
 }
@@ -62,11 +63,15 @@ model PedagogicalProject {
 model Discipline {
   id                     String                 @id @unique @default(uuid())
   name                   String
-  menu                   String
-  workload               Int
+  code                   String
   semester               Int
+  practicalHours         Int
+  extensionHours         Int
+  theoreticalHours       Int
   area_id                String
   pedagogical_project_id String
+  course_id              String
+  Course                 Course                 @relation(fields: [course_id], references: [id], onDelete: Cascade)
   Area                   Area                   @relation(fields: [area_id], references: [id], onDelete: Cascade)
   PedagogicalProject     PedagogicalProject     @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
   Modality               Modality?              @relation(fields: [modality_id], references: [id])

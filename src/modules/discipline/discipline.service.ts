@@ -4,6 +4,7 @@ import {
   DeleteDisciplineUseCase,
   FindAllDisciplinesUseCase,
   FindDisciplineByIdUseCase,
+  FindDisciplinesByCourseIdUseCase,
   FindDisciplinesByNameUseCase,
   UpdateDisciplineUseCase,
 } from './use-cases';
@@ -19,6 +20,7 @@ export class DisciplineService {
     private readonly findDiscisciplineByIdUseCase: FindDisciplineByIdUseCase,
     private readonly findDisciplineByNameUseCase: FindDisciplinesByNameUseCase,
     private readonly updateDisciplineUseCase: UpdateDisciplineUseCase,
+    private readonly findDisciplinesByCourseIdUseCase: FindDisciplinesByCourseIdUseCase,
   ) {}
 
   async createDiscipline(data: CreateDisciplineDto) {
@@ -35,6 +37,10 @@ export class DisciplineService {
 
   async findDisciplineByName(name: string) {
     return await this.findDisciplineByNameUseCase.execute(name);
+  }
+
+  async findDisciplinesByCourseId(course_id: string) {
+    return await this.findDisciplinesByCourseIdUseCase.execute(course_id);
   }
 
   async updateDiscipline(id: string, data: UpdateDisciplineDto) {

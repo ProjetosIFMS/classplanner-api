@@ -1,33 +1,15 @@
 meta {
-  name: Create Discipline
+  name: List Disciplines by Course id
   type: http
-  seq: 1
+  seq: 5
 }
 
-post {
-  url: {{base_url}}/discipline
-  body: json
+get {
+  url: {{base_url}}/discipline/
+  body: none
   auth: bearer
-}
-
-params:query {
-  : 
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmQ2NjkzZi1lMmEyLTRkMjktYjA3NS0yZGZiN2E2MTAyYzciLCJlbWFpbCI6InJhZmFlbC5udW5lczNAZXN0dWRhbnRlLmlmbXMuZWR1LmJyIiwiZmlyc3ROYW1lIjoiUkFGQUVMIiwibGFzdE5hbWUiOiJOVU5FUyIsInJvbGUiOiJDT09SRElOQVRPUiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLb3RYUWxHaTcyWThRVXNQRFFoWUFyd0xqSDlsaVcwNjhTTHBiRzViUDRCbW9vZnJnPXM5Ni1jIiwiYXJlYV9pZCI6ImVhODcwNzE1LTZhOGQtNDQwMS1iZmU4LWM1YWU4MGVlOTliOSIsImlhdCI6MTc0MTEwNTE3MCwiZXhwIjoxNzQxMTkxNTcwfQ.UpGERajfI_yeBID0aW08jkvTnUvhNrjeHdWJeRsbhrA
-}
-
-body:json {
-  {
-    "name": "Teste",
-    "semester": 1,
-    "pedagogical_project_id": "87da7a10-cc48-4ab3-936d-99b43d77cc74",
-    "area_id": "9ab1c373-dbe5-4dfc-910a-8ea541d59a3c",
-    "course_id": "e134d51a-ae66-4fc5-92fb-6f395b1006af", "code": "TESTE0101",
-    "practicalHours": 100,
-    "theoreticalHours": 100,
-    "extensionHours": 100
-  }
-  
 }
