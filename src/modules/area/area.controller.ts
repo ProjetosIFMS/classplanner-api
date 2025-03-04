@@ -30,7 +30,7 @@ export class AreaController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR)
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAllAreas() {
     return this.areaService.findAllAreas();
   }
