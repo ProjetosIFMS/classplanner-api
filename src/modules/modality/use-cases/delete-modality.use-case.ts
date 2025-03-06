@@ -22,9 +22,9 @@ export class DeleteModalityUseCase {
       if (!modalityExists) {
         throw new NotFoundException('Modality not found');
       }
-      await this.deleteModalityRepository.deleteModality(id);
+      const modality = await this.deleteModalityRepository.deleteModality(id);
       this.logger.log('Modality deleted', DeleteModalityUseCase.name);
-      return true;
+      return modality;
     } catch (err) {
       new ServiceUnavailableException('Something bad happened', {
         cause: err,
