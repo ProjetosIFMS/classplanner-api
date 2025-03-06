@@ -1,27 +1,27 @@
 import { CreateModalityDto } from '../dto/create-modality.dto';
-import { FindModalityByIdRepository } from '../repository/find-modality-by-id.repository';
-import { CreateModalityRepository } from './../repository/create-modality.reporitory';
+import { CreateModalityRepository } from '../repository/create-modality.repository';
 import {
   ConflictException,
   Injectable,
   Logger,
   ServiceUnavailableException,
 } from '@nestjs/common';
+import { FindModalityByNameRepository } from '../repository/find-modality-by-name.repository';
 
 @Injectable()
 export class CreateModalityUseCase {
   constructor(
     private readonly createModalityRepository: CreateModalityRepository,
-    private readonly findModalityByIdRepository: FindModalityByIdRepository,
+    private readonly findModalityByNameRepository: FindModalityByNameRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute(data: CreateModalityDto) {
     try {
-      const modalityExists =
-        await this.findModalityByIdRepository.findModalityById(data.id);
-      if (modalityExists) {
-        throw new ConflictException('Modality already exists');
+      const modalityNameExists =
+        await this.findModalityByNameRepository.findModalityByName(data.name);
+      if (modalityNameExists) {
+        throw new ConflictException('Modality name already in use.');
       }
 
       const modality = await this.createModalityRepository.createModality(data);

@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   Logger,
   NotFoundException,
@@ -7,34 +8,42 @@ import {
 import { FindModalityByIdRepository } from './../repository/find-modality-by-id.repository';
 import { UpdateModalityRepository } from './../repository/update-modality.repository';
 import { UpdateModalityDto } from '../dto/update-modality.dto';
+import { FindModalityByNameRepository } from '../repository/find-modality-by-name.repository';
 @Injectable()
 export class UpdateModalityUseCase {
   constructor(
     private readonly updateModalityRepository: UpdateModalityRepository,
+    private readonly findModalityByNameRepository: FindModalityByNameRepository,
     private readonly findModalityByIdRepository: FindModalityByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute(id: string, data: UpdateModalityDto) {
     try {
-      const disciplineExists =
+      const modalityExists =
         await this.findModalityByIdRepository.findModalityById(id);
-      if (!disciplineExists) {
-        const error = new NotFoundException('Discipline not found');
+      if (!modalityExists) {
+        const error = new NotFoundException('Modality not found');
         this.logger.error(error.message);
         throw error;
       }
-      const discipline = await this.updateModalityRepository.updateModality(
+
+      const modalityNameExists =
+        await this.findModalityByNameRepository.findModalityByName(data.name);
+      if (modalityNameExists) {
+        throw new ConflictException('Modality name already in use.');
+      }
+      const modality = await this.updateModalityRepository.updateModality(
         id,
         data,
       );
 
-      this.logger.log('Discipline updated', UpdateModalityUseCase.name);
-      return discipline;
+      this.logger.log('Modality updated', UpdateModalityUseCase.name);
+      return modality;
     } catch (err) {
       new ServiceUnavailableException('Something bad happened', {
         cause: err,
-        description: 'Error updating discipline',
+        description: 'Error updating modality',
       });
       this.logger.error(err.message);
       throw err;
