@@ -1,15 +1,21 @@
 meta {
-  name: list modality
+  name: update modality
   type: http
-  seq: 2
+  seq: 3
 }
 
-get {
-  url: {{base_url}}/modality
-  body: none
+patch {
+  url: {{base_url}}/modality/70d33748-0e66-418a-a18f-2bbf92f1e74c
+  body: json
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZTBlNGI5MC0zZmQyLTQ4M2ItOWRlMC0wMmI5NDYwYWY1ZDgiLCJlbWFpbCI6Im1pc2FlbC5zaWx2YUBlc3R1ZGFudGUuaWZtcy5lZHUuYnIiLCJmaXJzdE5hbWUiOiJNaXNhZWwiLCJsYXN0TmFtZSI6IkhlbnJpcXVlIiwicm9sZSI6IkNPT1JESU5BVE9SIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tYTE9mQ3BJRTRUQVB5VjQ2VVdtMkp5ZUp2T1ZwTEdESGJGVmV1Q28yOFRBMFlYWDQ9czk2LWMiLCJhcmVhX2lkIjoiNWQ2ZTA0NGQtZGQ0ZS00YjdmLTg2MTAtYjAzY2E5NTU5YWJmIiwiaWF0IjoxNzQxMjIxNTExLCJleHAiOjE3NDEzMDc5MTF9.te3GfQZjbWPmuyDyfr_KDW_OAhOixIPlQhS47mimHjI
+}
+
+body:json {
+  {
+      "name": "eletiva"
+    }
 }
