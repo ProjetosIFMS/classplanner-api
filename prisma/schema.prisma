@@ -57,7 +57,8 @@ model PedagogicalProject {
   workload           Int
   stageHours         Int
   complementaryHours Int
-  extensionCourses Int
+  extensionCourses   Int
+  documentUrl        String?
 }
 
 model Discipline {
