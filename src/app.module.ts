@@ -14,6 +14,7 @@ import { ModalityModule } from './modules/modality/modality.module';
 import { ClassgradeModule } from './modules/class-grade/classgrade.module';
 import { ClassgradeDisciplineModule } from './modules/classgrade-discipline/classgrade-discipline.module';
 import { ProfessorClassgradeModule } from './modules/professor-classgrade/professor-classgrade.module';
+import { UploadModule } from './shared/utils/uploads/uploads.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ProfessorClassgradeModule } from './modules/professor-classgrade/profes
     ClassgradeModule,
     ClassgradeDisciplineModule,
     ProfessorClassgradeModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [
