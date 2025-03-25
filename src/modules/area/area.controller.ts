@@ -49,4 +49,10 @@ export class AreaController {
   deleteArea(@Param('id') id: string) {
     return this.areaService.deleteArea(id);
   }
+
+  @Get(':id/professors')
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  findAllProfessorsFromAreaById(@Param('id') id: string) {
+    return this.areaService.findAllProfessorsFromAreaById(id);
+  }
 }
