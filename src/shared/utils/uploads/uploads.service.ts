@@ -29,6 +29,6 @@ export class UploadService {
       data: { documentUrl: publicUrl },
     });
 
-    return { data: { publicUrl, pedagogicalProject } };
+    return { data: { pedagogicalProject } };
   }
 }
