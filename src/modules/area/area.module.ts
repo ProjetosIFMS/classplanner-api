@@ -5,6 +5,7 @@ import { FindAllAreasRepository } from './repository/find-all-area.repository';
 import { FindAreaByIdRepository } from './repository/find-area-by-id.repository';
 import { DeleteAreaRepository } from './repository/delete-area.repository';
 import { UpdateAreaRepository } from './repository/update-area.repository';
+import { FindAllProfessorsFromAreaByIdRepository } from 'src/modules/area/repository/find-all-professors-from-area-by-id.repository';
 import { AreaService } from './area.service';
 import { AreaController } from './area.controller';
 
@@ -18,6 +19,7 @@ const usecases = Object.values(UseCases);
     FindAreaByIdRepository,
     DeleteAreaRepository,
     UpdateAreaRepository,
+    FindAllProfessorsFromAreaByIdRepository,
     AreaService,
     ...usecases,
     Logger,

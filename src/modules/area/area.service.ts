@@ -5,6 +5,7 @@ import {
   FindAllAreasUseCase,
   FindAreaByIdUseCase,
   UpdateAreaUseCase,
+  FindAllProfessorsFromAreaByIdUseCase,
 } from './use-cases';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
@@ -17,6 +18,7 @@ export class AreaService {
     private readonly findAreaByIdUseCase: FindAreaByIdUseCase,
     private readonly deleteAreaUseCase: DeleteAreaUseCase,
     private readonly updateAreaUseCase: UpdateAreaUseCase,
+    private readonly findAllProfessorsFromAreaByIdUseCase: FindAllProfessorsFromAreaByIdUseCase,
   ) {}
   async createArea(createAreaDto: CreateAreaDto) {
     return await this.createAreaUseCase.execute(createAreaDto);
@@ -36,5 +38,9 @@ export class AreaService {
 
   async deleteArea(id: string) {
     return await this.deleteAreaUseCase.execute(id);
+  }
+
+  async findAllProfessorsFromAreaById(id: string) {
+    return await this.findAllProfessorsFromAreaByIdUseCase.execute(id);
   }
 }
