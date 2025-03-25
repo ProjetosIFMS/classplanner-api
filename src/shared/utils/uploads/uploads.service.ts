@@ -8,7 +8,6 @@ export class UploadService {
 
   async uploadFile(file: Express.Multer.File, projectId: string) {
     const filePath = `${Date.now()}-${file.originalname}`;
-    console.log(filePath);
 
     const { error: uploadError } = await supabase.storage
       .from('uploads')
