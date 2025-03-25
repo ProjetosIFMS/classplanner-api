@@ -1,4 +1,3 @@
-// file.module.ts
 import { Module } from '@nestjs/common';
 import { UploadService } from './uploads.service';
 import { UploadController } from './uploads.controller';
