@@ -5,11 +5,18 @@ import {
   UseInterceptors,
   Body,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './uploads.service';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/modules/user/dto/Role';
 
 @Controller('uploads')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles(Role.COORDINATOR)
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
@@ -39,10 +46,10 @@ export class UploadController {
 
     const result = await this.uploadService.uploadFile(file, projectId);
 
-    if (!result.data) {
+    if (!result) {
       throw new BadRequestException('An error occurred during file upload.');
     }
 
-    return result.data;
+    return result;
   }
 }
