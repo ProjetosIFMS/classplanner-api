@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { DayoffService } from './dayoff.service';
 import { CreateDayoffDto } from './dto/create-dayoff.dto';
@@ -16,6 +17,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { Role } from 'src/modules/user/dto/Role';
 import { Roles } from 'src/decorators/roles.decorator';
+import { DAYOFF_STATUS } from 'src/modules/dayoff/dto/dayoff-status';
+import { WEEKDAY } from 'src/modules/dayoff/dto/weekday';
 
 @ApiTags('Dayoff')
 @Controller('dayoff')
@@ -31,8 +34,12 @@ export class DayoffController {
   }
 
   @Get()
-  findAllDayoffs() {
-    return this.dayoffService.findAllDayoffs();
+  @Roles(Role.COORDINATOR)
+  findAllDayoffs(
+    @Query('status') status: DAYOFF_STATUS | '' = '',
+    @Query('weekday') weekday: WEEKDAY | '' = '',
+  ) {
+    return this.dayoffService.findAllDayoffs(status, weekday);
   }
 
   @Get(':id')

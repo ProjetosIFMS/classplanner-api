@@ -5,31 +5,12 @@ meta {
 }
 
 get {
-  url: {
-  "course_id": "e134d51a-ae66-4fc5-92fb-6f395b1006af",
-  "description": "Some description",
-  "hasTCC": true,
-  "stageHours": 240,
-  "complementaryHours": 1000,
-  "year": 2011,
-  "status": true
-}{
-  "course_id": "e134d51a-ae66-4fc5-92fb-6f395b1006af",
-  "description": "Some description",
-  "hasTCC": true,
-  "stageHours": 240,
-  "complementaryHours": 1000,
-  "year": 2011,
-  "status": true
-}{
-  "course_id": "e134d51a-ae66-4fc5-92fb-6f395b1006af",
-  "description": "Some description",
-  "hasTCC": true,
-  "stageHours": 240,
-  "complementaryHours": 1000,
-  "year": 2011,
-  "status": true
-{{base_url}}/dayoff
+  url: {{base_url}}/dayoff?status=REJECTED&weekday=WEDNESDAY
   body: none
   auth: inherit
+}
+
+params:query {
+  status: REJECTED
+  weekday: WEDNESDAY
 }

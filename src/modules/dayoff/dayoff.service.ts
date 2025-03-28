@@ -10,6 +10,8 @@ import {
   ApproveDayoffUseCase,
   RejectDayoffUseCase,
 } from 'src/modules/dayoff/use-cases';
+import { DAYOFF_STATUS } from 'src/modules/dayoff/dto/dayoff-status';
+import { WEEKDAY } from 'src/modules/dayoff/dto/weekday';
 
 @Injectable()
 export class DayoffService {
@@ -27,8 +29,8 @@ export class DayoffService {
     return await this.createDayoffUseCase.execute(createDayoffDto);
   }
 
-  async findAllDayoffs() {
-    return await this.findAllDayoffsUseCase.execute();
+  async findAllDayoffs(status: DAYOFF_STATUS | '', weekday: WEEKDAY | '') {
+    return await this.findAllDayoffsUseCase.execute(status, weekday);
   }
 
   async findDayoffById(id: string) {
