@@ -1,0 +1,21 @@
+meta {
+  name: Create dayoff
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/dayoff
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "reason": "Busco meu filho na escola",
+    "schedule": "Espaçados",
+    "frequency": "3 aulas contínuas",
+    "weekday": "WEDNESDAY",
+    "user_id": "d6451a68-02f3-483b-b2b6-5b3a30617139"
+  }
+}
