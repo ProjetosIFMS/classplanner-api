@@ -64,7 +64,7 @@ export class PedagogicalProjectController {
       updatePedagogicalProjectDto,
     );
   }
-
+  @Roles(Role.COORDINATOR, Role.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.pedagogicalProjectService.deletePedagogicalProject(id);
