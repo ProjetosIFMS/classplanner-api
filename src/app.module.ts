@@ -15,6 +15,7 @@ import { ClassgradeModule } from './modules/class-grade/classgrade.module';
 import { ClassgradeDisciplineModule } from './modules/classgrade-discipline/classgrade-discipline.module';
 import { ProfessorClassgradeModule } from './modules/professor-classgrade/professor-classgrade.module';
 import { UploadModule } from './shared/utils/uploads/uploads.module';
+import { DayoffModule } from './modules/dayoff/dayoff.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { UploadModule } from './shared/utils/uploads/uploads.module';
     ClassgradeDisciplineModule,
     ProfessorClassgradeModule,
     UploadModule,
+    DayoffModule,
   ],
   controllers: [AppController],
   providers: [
