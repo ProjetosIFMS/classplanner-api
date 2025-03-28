@@ -29,7 +29,7 @@ export class DayoffController {
 
   @Post()
   @Roles(Role.PROFESSOR)
-  createCourse(@Body() createDayoffDto: CreateDayoffDto) {
+  createDayoff(@Body() createDayoffDto: CreateDayoffDto) {
     return this.dayoffService.createDayoff(createDayoffDto);
   }
 
