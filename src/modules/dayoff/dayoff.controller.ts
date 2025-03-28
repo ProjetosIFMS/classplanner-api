@@ -49,6 +49,18 @@ export class DayoffController {
     return this.dayoffService.updateDayoff(id, updateDayoffDto);
   }
 
+  @Patch(':id/approve')
+  @Roles(Role.COORDINATOR)
+  approveDayoff(@Param('id') id: string) {
+    return this.dayoffService.approveDayoff(id);
+  }
+
+  @Patch(':id/reject')
+  @Roles(Role.COORDINATOR)
+  rejectDayoff(@Param('id') id: string) {
+    return this.dayoffService.rejectDayoff(id);
+  }
+
   @Delete(':id')
   deleteDayoff(@Param('id') id: string) {
     return this.dayoffService.deleteDayoff(id);

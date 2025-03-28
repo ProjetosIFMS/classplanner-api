@@ -7,6 +7,8 @@ import {
   FindAllDayoffsUseCase,
   FindDayoffByIdUseCase,
   UpdateDayoffUseCase,
+  ApproveDayoffUseCase,
+  RejectDayoffUseCase,
 } from 'src/modules/dayoff/use-cases';
 
 @Injectable()
@@ -17,6 +19,8 @@ export class DayoffService {
     private readonly findAllDayoffsUseCase: FindAllDayoffsUseCase,
     private readonly findDayoffByIdUseCase: FindDayoffByIdUseCase,
     private readonly updateDayoffUseCase: UpdateDayoffUseCase,
+    private readonly approveDayoffUseCase: ApproveDayoffUseCase,
+    private readonly rejectDayoffUseCase: RejectDayoffUseCase,
   ) {}
 
   async createDayoff(createDayoffDto: CreateDayoffDto) {
@@ -33,6 +37,14 @@ export class DayoffService {
 
   async updateDayoff(id: string, updateDayoffDto: UpdateDayoffDto) {
     return await this.updateDayoffUseCase.execute(id, updateDayoffDto);
+  }
+
+  async approveDayoff(id: string) {
+    return await this.approveDayoffUseCase.execute(id);
+  }
+
+  async rejectDayoff(id: string) {
+    return await this.rejectDayoffUseCase.execute(id);
   }
 
   async deleteDayoff(id: string) {

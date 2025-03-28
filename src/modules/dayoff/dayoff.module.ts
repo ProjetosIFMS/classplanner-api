@@ -7,6 +7,8 @@ import { DeleteDayoffRepository } from 'src/modules/dayoff/repository/delete-day
 import { FindAllDayoffsRepository } from 'src/modules/dayoff/repository/find-all-dayoffs.repository';
 import { FindDayoffByIdRepository } from 'src/modules/dayoff/repository/find-dayoff-by-id.repository';
 import { UpdateDayoffRepository } from 'src/modules/dayoff/repository/update-dayoff.repository';
+import { ApproveDayoffRepository } from 'src/modules/dayoff/repository/approve-dayoff.repository';
+import { RejectDayoffRepository } from 'src/modules/dayoff/repository/reject-dayoff.repository';
 
 const usecases = Object.values(UseCases);
 
@@ -19,6 +21,8 @@ const usecases = Object.values(UseCases);
     FindAllDayoffsRepository,
     FindDayoffByIdRepository,
     UpdateDayoffRepository,
+    ApproveDayoffRepository,
+    RejectDayoffRepository,
     ...usecases,
     Logger,
   ],
