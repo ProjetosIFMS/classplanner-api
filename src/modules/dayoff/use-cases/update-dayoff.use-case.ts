@@ -3,7 +3,9 @@ import {
   Logger,
   NotFoundException,
   ServiceUnavailableException,
+  UnprocessableEntityException,
 } from '@nestjs/common';
+import { PrismaClientValidationError } from '@prisma/client/runtime/library';
 import { UpdateDayoffDto } from 'src/modules/dayoff/dto/update-dayoff.dto';
 import { FindDayoffByIdRepository } from 'src/modules/dayoff/repository/find-dayoff-by-id.repository';
 import { UpdateDayoffRepository } from 'src/modules/dayoff/repository/update-dayoff.repository';
@@ -20,6 +22,7 @@ export class UpdateDayoffUseCase {
     try {
       const dayoffExists =
         await this.findDayoffByIdRepository.findDayoffById(id);
+
       if (!dayoffExists) {
         const error = new NotFoundException('Dayoff not found');
         this.logger.error(error.message);
@@ -30,6 +33,19 @@ export class UpdateDayoffUseCase {
       this.logger.log('Dayoff updated');
       return dayoff;
     } catch (err) {
+      if (err instanceof NotFoundException) {
+        this.logger.error(err.message, UpdateDayoffUseCase.name);
+        throw err;
+      }
+
+      if (err instanceof PrismaClientValidationError) {
+        const error = new UnprocessableEntityException(
+          'The provided data is invalid or cannot be processed.',
+        );
+        this.logger.error(err.message, UpdateDayoffUseCase.name);
+        throw error;
+      }
+
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error while updating dayoff',

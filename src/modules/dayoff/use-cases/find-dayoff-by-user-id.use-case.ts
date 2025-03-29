@@ -24,6 +24,11 @@ export class FindDayoffByUserIdUseCase {
 
       return dayoff;
     } catch (err) {
+      if (err instanceof NotFoundException) {
+        this.logger.error(err.message, FindDayoffByUserIdUseCase.name);
+        throw err;
+      }
+
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error while finding dayoff by user id',

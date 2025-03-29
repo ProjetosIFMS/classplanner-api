@@ -16,13 +16,20 @@ export class FindDayoffByIdUseCase {
   async execute(id: string) {
     try {
       const dayoff = await this.findDayoffByIdRepository.findDayoffById(id);
+
       if (!dayoff) {
         const error = new NotFoundException('Dayoff not found');
         this.logger.error(error.message);
         throw error;
       }
+
       return dayoff;
     } catch (err) {
+      if (err instanceof NotFoundException) {
+        this.logger.error(err.message, FindDayoffByIdUseCase.name);
+        throw err;
+      }
+
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error while finding dayoff by id',

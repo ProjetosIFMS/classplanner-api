@@ -19,6 +19,7 @@ export class RejectDayoffUseCase {
     try {
       const dayoffExists =
         await this.findDayoffByIdRepository.findDayoffById(id);
+
       if (!dayoffExists) {
         throw new NotFoundException('Dayoff not found');
       }
@@ -27,6 +28,11 @@ export class RejectDayoffUseCase {
       this.logger.log('Dayoff rejected');
       return dayoff;
     } catch (err) {
+      if (err instanceof NotFoundException) {
+        this.logger.error(err.message, RejectDayoffUseCase.name);
+        throw err;
+      }
+
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error while rejecting dayoff',

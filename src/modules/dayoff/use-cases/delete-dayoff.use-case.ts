@@ -19,10 +19,9 @@ export class DeleteDayoffUseCase {
     try {
       const dayoffExists =
         await this.findDayoffByIdRepository.findDayoffById(id);
+
       if (!dayoffExists) {
-        const error = new NotFoundException('Dayoff not found');
-        this.logger.error(error.message);
-        throw error;
+        throw new NotFoundException('Dayoff not found');
       }
 
       const dayoff =
@@ -30,6 +29,11 @@ export class DeleteDayoffUseCase {
       this.logger.log('Dayoff deleted');
       return dayoff;
     } catch (err) {
+      if (err instanceof NotFoundException) {
+        this.logger.error(err.message, DeleteDayoffUseCase.name);
+        throw err;
+      }
+
       const error = new ServiceUnavailableException('Something bad Happened', {
         cause: err,
         description: 'Error deleting dayoff',
