@@ -6,5 +6,4 @@ export type CreateDayoffInput = {
   schedule: string;
   frequency: string;
   weekday: WEEKDAY;
-  user_id: string;
 };

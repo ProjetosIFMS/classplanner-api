@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  Req,
 } from '@nestjs/common';
 import { DayoffService } from './dayoff.service';
 import { CreateDayoffDto } from './dto/create-dayoff.dto';
@@ -29,8 +30,8 @@ export class DayoffController {
 
   @Post()
   @Roles(Role.PROFESSOR)
-  createDayoff(@Body() createDayoffDto: CreateDayoffDto) {
-    return this.dayoffService.createDayoff(createDayoffDto);
+  createDayoff(@Body() createDayoffDto: CreateDayoffDto, @Req() req: any) {
+    return this.dayoffService.createDayoff(req.user.id, createDayoffDto);
   }
 
   @Get()
@@ -42,18 +43,27 @@ export class DayoffController {
     return this.dayoffService.findAllDayoffs(status, weekday);
   }
 
+  @Get('professor/:user_id')
+  @Roles(Role.COORDINATOR)
+  findDayoffByUserId(@Param('user_id') user_id: string) {
+    return this.dayoffService.findDayoffByUserId(user_id);
+  }
+
+  @Get('me')
+  findMyDayoff(@Req() req: any) {
+    return this.dayoffService.findDayoffByUserId(req.user.id);
+  }
+
   @Get(':id')
+  @Roles(Role.COORDINATOR)
   findDayoffById(@Param('id') id: string) {
     return this.dayoffService.findDayoffById(id);
   }
 
-  @Patch(':id')
+  @Patch()
   @Roles(Role.PROFESSOR)
-  updateDayoff(
-    @Param('id') id: string,
-    @Body() updateDayoffDto: UpdateDayoffDto,
-  ) {
-    return this.dayoffService.updateDayoff(id, updateDayoffDto);
+  updateDayoff(@Body() updateDayoffDto: UpdateDayoffDto, @Req() req: any) {
+    return this.dayoffService.updateDayoff(req.user.id, updateDayoffDto);
   }
 
   @Patch(':id/approve')
@@ -69,6 +79,7 @@ export class DayoffController {
   }
 
   @Delete(':id')
+  @Roles(Role.COORDINATOR)
   deleteDayoff(@Param('id') id: string) {
     return this.dayoffService.deleteDayoff(id);
   }

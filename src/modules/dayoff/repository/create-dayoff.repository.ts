@@ -6,9 +6,12 @@ import { CreateDayoffInput } from 'src/modules/dayoff/inputs/create-dayoff.input
 export class CreateDayoffRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createDayoff(data: CreateDayoffInput) {
+  async createDayoff(user_id: string, data: CreateDayoffInput) {
     return await this.prisma.dayoff.create({
-      data,
+      data: {
+        user_id,
+        ...data,
+      },
     });
   }
 }

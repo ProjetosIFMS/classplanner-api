@@ -12,6 +12,7 @@ import {
 } from 'src/modules/dayoff/use-cases';
 import { DAYOFF_STATUS } from 'src/modules/dayoff/dto/dayoff-status';
 import { WEEKDAY } from 'src/modules/dayoff/dto/weekday';
+import { FindDayoffByUserIdUseCase } from 'src/modules/dayoff/use-cases/find-dayoff-by-user-id.use-case';
 
 @Injectable()
 export class DayoffService {
@@ -20,13 +21,14 @@ export class DayoffService {
     private readonly deleteDayoffUseCase: DeleteDayoffUseCase,
     private readonly findAllDayoffsUseCase: FindAllDayoffsUseCase,
     private readonly findDayoffByIdUseCase: FindDayoffByIdUseCase,
+    private readonly findDayoffByUserIdUseCase: FindDayoffByUserIdUseCase,
     private readonly updateDayoffUseCase: UpdateDayoffUseCase,
     private readonly approveDayoffUseCase: ApproveDayoffUseCase,
     private readonly rejectDayoffUseCase: RejectDayoffUseCase,
   ) {}
 
-  async createDayoff(createDayoffDto: CreateDayoffDto) {
-    return await this.createDayoffUseCase.execute(createDayoffDto);
+  async createDayoff(user_id: string, createDayoffDto: CreateDayoffDto) {
+    return await this.createDayoffUseCase.execute(user_id, createDayoffDto);
   }
 
   async findAllDayoffs(status: DAYOFF_STATUS | '', weekday: WEEKDAY | '') {
@@ -35,6 +37,10 @@ export class DayoffService {
 
   async findDayoffById(id: string) {
     return await this.findDayoffByIdUseCase.execute(id);
+  }
+
+  async findDayoffByUserId(user_id: string) {
+    return await this.findDayoffByUserIdUseCase.execute(user_id);
   }
 
   async updateDayoff(id: string, updateDayoffDto: UpdateDayoffDto) {
