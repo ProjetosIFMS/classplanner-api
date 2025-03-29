@@ -19,6 +19,7 @@ model User {
   sessions            Session[]
   Area                Area?                 @relation(fields: [area_id], references: [id], onDelete: Cascade)
   ProfessorClassGrade ProfessorClassGrade[]
+  Dayoff              Dayoff?
 
   @@index([area_id])
 }
@@ -156,8 +157,37 @@ model Area {
   Discipline Discipline[]
 }
 
+model Dayoff {
+  id         String        @id @unique @default(uuid())
+  reason     String
+  schedule   String
+  frequency  String
+  weekday    WEEKDAY
+  created_at DateTime      @default(now())
+  updated_at DateTime      @updatedAt
+  status     DAYOFF_STATUS @default(PENDING)
+  User       User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String        @unique
+}
+
 enum ROLE {
   PROFESSOR
   COORDINATOR
   ADMIN
+}
+
+enum DAYOFF_STATUS {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum WEEKDAY {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
 }

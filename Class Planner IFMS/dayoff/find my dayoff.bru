@@ -1,0 +1,11 @@
+meta {
+  name: find my dayoff
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{base_url}}/dayoff/me
+  body: none
+  auth: inherit
+}

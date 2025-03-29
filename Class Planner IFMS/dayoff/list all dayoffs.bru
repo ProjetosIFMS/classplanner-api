@@ -1,0 +1,16 @@
+meta {
+  name: list all dayoffs
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/dayoff?status=REJECTED&weekday=WEDNESDAY
+  body: none
+  auth: inherit
+}
+
+params:query {
+  status: REJECTED
+  weekday: WEDNESDAY
+}
