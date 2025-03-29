@@ -15,14 +15,16 @@ export class CreateProfessorClassgradeUseCase {
     private readonly createProfessorClassgradeRepository: CreateProfessorClassGradeRepository,
     private readonly findClassgradeByIdRepository: FindClassGradeByIdRepository,
     private readonly findUserByIdRepository: FindUserByIdRepository,
-    private readonly logger: Logger = new Logger(),
+    private readonly logger: Logger,
   ) {}
 
   async execute(data: CreateProfessorClassGradeDto) {
     try {
-      const userExists = this.findUserByIdRepository.findUserById(data.user_id);
+      const userExists = await this.findUserByIdRepository.findUserById(
+        data.user_id,
+      );
       const classGradeExists =
-        this.findClassgradeByIdRepository.findClassGradeById(
+        await this.findClassgradeByIdRepository.findClassGradeById(
           data.classGrade_id,
         );
 
@@ -37,18 +39,19 @@ export class CreateProfessorClassgradeUseCase {
         this.createProfessorClassgradeRepository.createProfessorClassGrade(
           data,
         );
+
       this.logger.log(
         'Professor alocated to classgrade',
         CreateProfessorClassgradeUseCase.name,
       );
       return professorClassgrade;
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error alocating professor to classgrade',
       });
-      this.logger.error(err.message);
-      throw new err();
+      this.logger.error(err.message, CreateProfessorClassgradeUseCase.name);
+      throw error;
     }
   }
 }
