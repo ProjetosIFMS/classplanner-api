@@ -4,6 +4,7 @@ import { UpdateDayoffDto } from './dto/update-dayoff.dto';
 import {
   CreateDayoffUseCase,
   DeleteDayoffUseCase,
+  DeleteMyDayoffUseCase,
   FindAllDayoffsUseCase,
   FindDayoffByIdUseCase,
   UpdateDayoffUseCase,
@@ -19,6 +20,7 @@ export class DayoffService {
   constructor(
     private readonly createDayoffUseCase: CreateDayoffUseCase,
     private readonly deleteDayoffUseCase: DeleteDayoffUseCase,
+    private readonly deleteMyDayoffUseCase: DeleteMyDayoffUseCase,
     private readonly findAllDayoffsUseCase: FindAllDayoffsUseCase,
     private readonly findDayoffByIdUseCase: FindDayoffByIdUseCase,
     private readonly findDayoffByUserIdUseCase: FindDayoffByUserIdUseCase,
@@ -53,6 +55,10 @@ export class DayoffService {
 
   async rejectDayoff(id: string) {
     return await this.rejectDayoffUseCase.execute(id);
+  }
+
+  async DeleteMyDayoff(user_id: string) {
+    return await this.deleteMyDayoffUseCase.execute(user_id);
   }
 
   async deleteDayoff(id: string) {

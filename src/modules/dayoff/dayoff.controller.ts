@@ -78,7 +78,14 @@ export class DayoffController {
     return this.dayoffService.rejectDayoff(id);
   }
 
+  @Delete('me')
+  @Roles(Role.PROFESSOR)
+  deleteMyDayoff(@Req() req: any) {
+    return this.dayoffService.DeleteMyDayoff(req.user.id);
+  }
+
   @Delete(':id')
+  @Roles(Role.COORDINATOR)
   deleteDayoff(@Param('id') id: string) {
     return this.dayoffService.deleteDayoff(id);
   }
