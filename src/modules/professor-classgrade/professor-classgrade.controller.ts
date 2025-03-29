@@ -20,7 +20,7 @@ import { UpdateProfessorClassgradeDto } from './dto/update-professor-classgrade.
 @ApiTags('professor-classgrade')
 @Controller('professor-classgrade')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR, Role.PROFESSOR)
+@Roles(Role.COORDINATOR)
 export class ProfessorClassgradeController {
   constructor(
     private readonly professorClassgradeService: ProfessorClassgradeService,
