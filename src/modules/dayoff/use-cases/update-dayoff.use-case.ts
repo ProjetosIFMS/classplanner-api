@@ -34,7 +34,7 @@ export class UpdateDayoffUseCase {
         cause: err,
         description: 'Error while updating dayoff',
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, UpdateDayoffUseCase.name);
       throw error;
     }
   }

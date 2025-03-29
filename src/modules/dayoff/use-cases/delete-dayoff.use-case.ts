@@ -34,7 +34,7 @@ export class DeleteDayoffUseCase {
         cause: err,
         description: 'Error deleting dayoff',
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, DeleteDayoffUseCase.name);
       throw error;
     }
   }

@@ -27,6 +27,7 @@ export class FindDayoffByIdUseCase {
         cause: err,
         description: 'Error while finding dayoff by id',
       });
+      this.logger.error(error.message, FindDayoffByIdUseCase.name);
       throw error;
     }
   }

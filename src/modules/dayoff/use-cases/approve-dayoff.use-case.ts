@@ -31,7 +31,7 @@ export class ApproveDayoffUseCase {
         cause: err,
         description: 'Error while approving dayoff',
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, ApproveDayoffUseCase.name);
       throw error;
     }
   }
