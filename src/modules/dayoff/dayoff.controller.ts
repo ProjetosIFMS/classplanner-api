@@ -79,7 +79,6 @@ export class DayoffController {
   }
 
   @Delete(':id')
-  @Roles(Role.COORDINATOR)
   deleteDayoff(@Param('id') id: string) {
     return this.dayoffService.deleteDayoff(id);
   }
