@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
@@ -31,8 +32,15 @@ export class CourseController {
 
   @Get()
   @Roles(Role.PROFESSOR, Role.COORDINATOR)
-  findAllCourses() {
-    return this.courseService.findAllCourses();
+  findAllCourses(
+    @Query('includeDisciplines') includeDisciplines: boolean = false,
+    @Query('includePedagogicalProjects')
+    includePedagogicalProjects: boolean = false,
+  ) {
+    return this.courseService.findAllCourses(
+      includeDisciplines,
+      includePedagogicalProjects,
+    );
   }
 
   @Get(':id')

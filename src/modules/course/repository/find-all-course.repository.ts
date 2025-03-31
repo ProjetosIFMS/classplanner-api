@@ -4,8 +4,17 @@ import { PrismaService } from '../../../shared/databases/prisma.database';
 @Injectable()
 export class FindAllCoursesRepository {
   constructor(private readonly prisma: PrismaService) {}
-  async findAllCourses() {
-    const courses = await this.prisma.course.findMany();
+
+  async findAllCourses(
+    includeDisciplines: boolean,
+    includePedagogicalProjects: boolean,
+  ) {
+    const courses = await this.prisma.course.findMany({
+      include: {
+        disciplines: includeDisciplines ? true : false,
+        pedagogicalProjects: includePedagogicalProjects ? true : false,
+      },
+    });
 
     return courses;
   }

@@ -5,7 +5,12 @@ meta {
 }
 
 get {
-  url: {{base_url}}/course
+  url: {{base_url}}/course?includeDisciplines=true&includePedagogicalProjects=true
   body: none
   auth: inherit
+}
+
+params:query {
+  includeDisciplines: true
+  includePedagogicalProjects: true
 }

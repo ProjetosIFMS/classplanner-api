@@ -13,9 +13,15 @@ export class FindAllCoursesUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute() {
+  async execute(
+    includeDisciplines: boolean,
+    includePedagogicalProjects: boolean,
+  ) {
     try {
-      const courses = await this.findAllCoursesRepository.findAllCourses();
+      const courses = await this.findAllCoursesRepository.findAllCourses(
+        includeDisciplines,
+        includePedagogicalProjects,
+      );
       if (!courses) {
         throw new NotFoundException('Courses not found');
       }
@@ -24,9 +30,9 @@ export class FindAllCoursesUseCase {
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad Happened', {
         cause: err,
-        description: 'Error deleting Course',
+        description: 'Error finding all courses',
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, FindAllCoursesUseCase.name);
       throw error;
     }
   }

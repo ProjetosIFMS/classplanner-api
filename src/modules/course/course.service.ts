@@ -22,8 +22,14 @@ export class CourseService {
     return await this.createCourseUseCase.execute(createCourseDto);
   }
 
-  async findAllCourses() {
-    return await this.findAllCoursesUseCase.execute();
+  async findAllCourses(
+    includeDisciplines: boolean,
+    includePedagogicalProjects: boolean,
+  ) {
+    return await this.findAllCoursesUseCase.execute(
+      includeDisciplines,
+      includePedagogicalProjects,
+    );
   }
 
   async findCourseById(id: string) {
