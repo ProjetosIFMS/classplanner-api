@@ -19,10 +19,11 @@ export class CreateClassGradeRepository {
     for (const discipline of data.disciplines) {
       await this.prisma.classGradeDiscipline.create({
         data: {
+          period_id: data.period_id,
           classGrade_id: classGrade.id,
           discipline_id: discipline.discipline_id,
-          modality: {
-            connect: discipline.modalities_id.map((id) => ({ id })),
+          Modality: {
+            connect: discipline.modalities_ids.map((id) => ({ id })),
           },
         },
       });

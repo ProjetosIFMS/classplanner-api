@@ -138,7 +138,7 @@ model ClassGradeDiscipline {
   classGrade_id String
   discipline_id String
   period_id     String
-  modality      Modality[]
+  Modality      Modality[]
   Period        Period     @relation(fields: [period_id], references: [id], onDelete: Cascade)
   ClassGrade    ClassGrade @relation(fields: [classGrade_id], references: [id], onDelete: Cascade)
   Discipline    Discipline @relation(fields: [discipline_id], references: [id], onDelete: Cascade)

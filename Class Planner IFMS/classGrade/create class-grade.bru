@@ -1,0 +1,37 @@
+meta {
+  name: create class-grade
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/classgrade
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "year": 2029,
+    "semester": 7,
+    "course_id": "6a61d534-ceff-4bd2-8342-b72cc53f2c64",
+    "pedagogical_project_id": "3a1fad95-1afe-4040-935b-7fb1aef086a4",
+    "period_id": "7f2fe289-e265-4e24-98ef-2a7445e8ec8f",
+    "disciplines": [
+      {
+        "discipline_id": "196ae09a-0b7a-432b-8a41-6ef2b354ef2a",
+        "modalities_ids": [
+          "4a8dbf72-25ae-4270-b0bb-3ef170ee7c7d",
+          "05007b59-bfe4-4a5e-8d28-0530b8e8c7af"
+        ]
+      },
+      {
+        "discipline_id": "196ae09a-0b7a-432b-8a41-6ef2b354ef2a",
+        "modalities_ids": [
+          "4a8dbf72-25ae-4270-b0bb-3ef170ee7c7d",
+          "05007b59-bfe4-4a5e-8d28-0530b8e8c7af"
+        ]
+      }
+    ]
+  }
+}

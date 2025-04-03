@@ -20,6 +20,10 @@ export class CreateClassGradeDto {
   pedagogical_project_id: string;
 
   @ApiProperty()
+  @IsString()
+  period_id: string;
+
+  @ApiProperty()
   @IsArray()
   disciplines: ClassgradeDisciplines[];
 }

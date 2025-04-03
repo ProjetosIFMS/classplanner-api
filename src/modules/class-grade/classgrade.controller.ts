@@ -18,7 +18,7 @@ import { Role } from 'prisma/seed';
 import { UpdateClassGradeDto } from './dto/update-classgrade.dto';
 
 @ApiTags('ClassGrade')
-@Controller('class-grade')
+@Controller('classgrade')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Roles(Role.COORDINATOR)
 export class ClassgradeController {
