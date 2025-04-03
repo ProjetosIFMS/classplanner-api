@@ -5,7 +5,16 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class FindAllClassGradesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAllClassGrades() {
-    return await this.prisma.classGrade.findMany();
+  async findAllClassGrades(includeDisciplines) {
+    return await this.prisma.classGrade.findMany({
+      include: {
+        ClassGradeDiscipline: includeDisciplines
+          ? {
+              include: { Discipline: true },
+              omit: { discipline_id: true },
+            }
+          : false,
+      },
+    });
   }
 }

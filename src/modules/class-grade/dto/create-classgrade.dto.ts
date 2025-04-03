@@ -1,17 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsUUID } from 'class-validator';
-
+import {
+  ArrayMinSize,
+  IsArray,
+  IsInt,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer'; // Ensure this is imported
+import { ClassgradeDiscipline } from 'src/modules/class-grade/types/classgrade-disciplines';
 export class CreateClassGradeDto {
   @ApiProperty()
-  @IsUUID()
-  id: string;
-
-  @ApiProperty()
-  @IsString()
+  @IsInt()
   year: number;
 
   @ApiProperty()
-  @IsString()
+  @IsInt()
   semester: number;
 
   @ApiProperty()
@@ -21,4 +24,15 @@ export class CreateClassGradeDto {
   @ApiProperty()
   @IsString()
   pedagogical_project_id: string;
+
+  @ApiProperty()
+  @IsString()
+  period_id: string;
+
+  @ApiProperty()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
+  @Type(() => ClassgradeDiscipline)
+  disciplines: ClassgradeDiscipline[];
 }

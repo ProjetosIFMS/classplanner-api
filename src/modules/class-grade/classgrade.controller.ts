@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ClassgradeService } from './classgrade.service';
 import { CreateClassGradeDto } from './dto/create-classgrade.dto';
@@ -14,11 +15,11 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'prisma/seed';
+import { Role } from 'src/modules/user/dto/Role';
 import { UpdateClassGradeDto } from './dto/update-classgrade.dto';
 
 @ApiTags('ClassGrade')
-@Controller('class-grade')
+@Controller('classgrade')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Roles(Role.COORDINATOR)
 export class ClassgradeController {
@@ -30,8 +31,8 @@ export class ClassgradeController {
   }
 
   @Get()
-  findAll() {
-    return this.classgradeService.findAllClassGrade();
+  findAll(@Query('includeDisciplines') includeDisciplines: boolean = false) {
+    return this.classgradeService.findAllClassGrade(includeDisciplines);
   }
 
   @Get(':id')

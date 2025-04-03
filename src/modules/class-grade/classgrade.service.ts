@@ -22,8 +22,8 @@ export class ClassgradeService {
     return await this.createClassGradeUseCase.execute(data);
   }
 
-  async findAllClassGrade() {
-    return await this.findAllClassGradesUseCase.execute(); //;
+  async findAllClassGrade(includeDisciplines: boolean) {
+    return await this.findAllClassGradesUseCase.execute(includeDisciplines); //;
   }
 
   async findClassGradeById(id: string) {
