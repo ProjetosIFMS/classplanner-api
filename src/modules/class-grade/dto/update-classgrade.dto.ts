@@ -1,16 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsString, IsArray, IsOptional, ValidateNested } from 'class-validator';
+import {
+  IsString,
+  IsArray,
+  IsOptional,
+  ValidateNested,
+  IsInt,
+} from 'class-validator';
 import { ClassgradeDiscipline } from 'src/modules/class-grade/types/classgrade-disciplines';
 
 export class UpdateClassGradeDto {
   @ApiProperty()
-  @IsString()
+  @IsInt()
   @IsOptional()
   year: number;
 
   @ApiProperty()
-  @IsString()
+  @IsInt()
   @IsOptional()
   semester: number;
 
