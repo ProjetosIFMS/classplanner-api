@@ -1,14 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsString } from 'class-validator';
-import type { ClassgradeDisciplines } from 'src/modules/class-grade/types/classgrade-disciplines';
-
+import {
+  ArrayMinSize,
+  IsArray,
+  IsInt,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer'; // Ensure this is imported
+import { ClassgradeDiscipline } from 'src/modules/class-grade/types/classgrade-disciplines';
 export class CreateClassGradeDto {
   @ApiProperty()
-  @IsString()
+  @IsInt()
   year: number;
 
   @ApiProperty()
-  @IsString()
+  @IsInt()
   semester: number;
 
   @ApiProperty()
@@ -25,5 +31,8 @@ export class CreateClassGradeDto {
 
   @ApiProperty()
   @IsArray()
-  disciplines: ClassgradeDisciplines[];
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
+  @Type(() => ClassgradeDiscipline)
+  disciplines: ClassgradeDiscipline[];
 }

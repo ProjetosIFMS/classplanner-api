@@ -1,3 +1,38 @@
-import { CreateClassGradeDto } from './create-classgrade.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsString, IsArray, IsOptional, ValidateNested } from 'class-validator';
+import { ClassgradeDiscipline } from 'src/modules/class-grade/types/classgrade-disciplines';
 
-export class UpdateClassGradeDto extends CreateClassGradeDto {}
+export class UpdateClassGradeDto {
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  year: number;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  semester: number;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  course_id: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  pedagogical_project_id: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  period_id: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @IsArray()
+  @Type(() => ClassgradeDiscipline)
+  disciplines: ClassgradeDiscipline[];
+}

@@ -14,7 +14,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'prisma/seed';
+import { Role } from 'src/modules/user/dto/Role';
 import { UpdateClassGradeDto } from './dto/update-classgrade.dto';
 
 @ApiTags('ClassGrade')

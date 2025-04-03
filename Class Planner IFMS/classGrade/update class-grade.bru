@@ -5,13 +5,22 @@ meta {
 }
 
 patch {
-  url: {{base_url}}/classgrade/daf9f76d-498e-4f34-b2b8-52f8f5073732
+  url: {{base_url}}/classgrade/ccf37972-be4a-4df1-9d61-c15928a4206e
   body: json
   auth: inherit
 }
 
 body:json {
   {
-      "year": 2005
+    "year": 2005,
+    "semester": 4,
+    "disciplines": [
+      {
+        "discipline_id": "196ae09a-0b7a-432b-8a41-6ef2b354ef2a",
+        "modalities_ids": [
+          "05007b59-bfe4-4a5e-8d28-0530b8e8c7af"
+        ]
+      }
+    ]
   }
 }

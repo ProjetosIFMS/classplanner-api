@@ -15,7 +15,10 @@ export class FindAllClassGradeUseCase {
     try {
       const classGrades =
         await this.findAllClassGradesRepository.findAllClassGrades();
-      this.logger.log('All class grades fetched', FindAllClassGradeUseCase);
+      this.logger.log(
+        'All class grades fetched',
+        FindAllClassGradeUseCase.name,
+      );
       return classGrades;
     } catch (err) {
       new ServiceUnavailableException('Something bad happened', {
