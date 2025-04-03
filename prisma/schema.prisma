@@ -143,6 +143,7 @@ model ClassGradeDiscipline {
   ClassGrade    ClassGrade @relation(fields: [classGrade_id], references: [id], onDelete: Cascade)
   Discipline    Discipline @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
 
+  @@unique([classGrade_id, discipline_id])
   @@index([classGrade_id])
   @@index([discipline_id])
 }
