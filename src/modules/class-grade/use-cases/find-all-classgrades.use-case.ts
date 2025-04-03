@@ -22,7 +22,7 @@ export class FindAllClassGradeUseCase {
         cause: err,
         description: 'Error fetching class grades',
       });
-      this.logger.error(err.message);
+      this.logger.error(err.message, FindAllClassGradeUseCase.name);
       throw err;
     }
   }

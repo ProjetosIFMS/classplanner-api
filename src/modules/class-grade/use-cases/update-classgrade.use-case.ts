@@ -36,7 +36,7 @@ export class UpdateClassGradeUseCase {
         cause: err,
         description: 'Error updating class grade',
       });
-      this.logger.error(err.message);
+      this.logger.error(err.message, UpdateClassGradeUseCase.name);
       throw err;
     }
   }

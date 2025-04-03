@@ -36,10 +36,11 @@ model Session {
 }
 
 model Course {
-  id                  String               @id @unique @default(uuid())
-  name                String
-  quantity_semester   Int
-  workload            Int
+  id                String @id @unique @default(uuid())
+  name              String
+  quantity_semester Int
+  workload          Int
+
   disciplines         Discipline[]
   pedagogicalProjects PedagogicalProject[]
   classGrade          ClassGrade[]
@@ -76,8 +77,7 @@ model Discipline {
   Course                 Course                 @relation(fields: [course_id], references: [id], onDelete: Cascade)
   Area                   Area                   @relation(fields: [area_id], references: [id], onDelete: Cascade)
   PedagogicalProject     PedagogicalProject     @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
-  Modality               Modality?              @relation(fields: [modality_id], references: [id])
-  modality_id            String?
+  Modality               Modality[]
   DisciplineModality     DisciplineModality[]
   ClassGrade             ClassGradeDiscipline[]
 
@@ -88,7 +88,6 @@ model Discipline {
 model Modality {
   id                   String                 @id @unique @default(uuid())
   name                 String
-  classGrade           ClassGrade[]
   Discipline           Discipline[]
   DisciplineModality   DisciplineModality[]
   ClassGradeDiscipline ClassGradeDiscipline[]
@@ -130,8 +129,7 @@ model ClassGrade {
   course                 Course                 @relation(fields: [course_id], references: [id], onDelete: Cascade)
   pedagogical_project_id String
   pedagogical_project    PedagogicalProject     @relation(fields: [pedagogical_project_id], references: [id], onDelete: Cascade)
-  disciplines            ClassGradeDiscipline[]
-  modality               Modality[]
+  ClassGradeDiscipline   ClassGradeDiscipline[]
   ProfessorClassGrade    ProfessorClassGrade[]
 }
 
@@ -139,10 +137,9 @@ model ClassGradeDiscipline {
   id            String     @id @unique @default(uuid())
   classGrade_id String
   discipline_id String
-  modality_id   String
   period_id     String
+  modality      Modality[]
   Period        Period     @relation(fields: [period_id], references: [id], onDelete: Cascade)
-  Modality      Modality   @relation(fields: [modality_id], references: [id], onDelete: Cascade)
   ClassGrade    ClassGrade @relation(fields: [classGrade_id], references: [id], onDelete: Cascade)
   Discipline    Discipline @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
 

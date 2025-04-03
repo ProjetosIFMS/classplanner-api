@@ -30,7 +30,7 @@ export class DeleteClassGradeUseCase {
         cause: err,
         description: 'Error deleting class grade',
       });
-      this.logger.error(err.message);
+      this.logger.error(err.message, DeleteClassGradeUseCase.name);
       throw err;
     }
   }

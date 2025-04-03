@@ -27,7 +27,7 @@ export class FindClassGradeByIdUseCase {
         cause: err,
         description: 'Error finding class grade',
       });
-      this.logger.error(err.message);
+      this.logger.error(err.message, FindClassGradeByIdUseCase.name);
       throw err;
     }
   }
