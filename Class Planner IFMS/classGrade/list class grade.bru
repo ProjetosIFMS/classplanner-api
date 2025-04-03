@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{base_url}}/classgrade
+  url: {{base_url}}/classgrade?includeDisciplines=true
   body: none
   auth: inherit
+}
+
+params:query {
+  includeDisciplines: true
 }

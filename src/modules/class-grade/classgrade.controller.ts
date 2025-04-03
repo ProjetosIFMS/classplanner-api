@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ClassgradeService } from './classgrade.service';
 import { CreateClassGradeDto } from './dto/create-classgrade.dto';
@@ -30,8 +31,8 @@ export class ClassgradeController {
   }
 
   @Get()
-  findAll() {
-    return this.classgradeService.findAllClassGrade();
+  findAll(@Query('includeDisciplines') includeDisciplines: boolean = false) {
+    return this.classgradeService.findAllClassGrade(includeDisciplines);
   }
 
   @Get(':id')

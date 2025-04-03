@@ -11,10 +11,12 @@ export class FindAllClassGradeUseCase {
     private readonly findAllClassGradesRepository: FindAllClassGradesRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
-  async execute() {
+  async execute(includeDisciplines: boolean) {
     try {
       const classGrades =
-        await this.findAllClassGradesRepository.findAllClassGrades();
+        await this.findAllClassGradesRepository.findAllClassGrades(
+          includeDisciplines,
+        );
       this.logger.log(
         'All class grades fetched',
         FindAllClassGradeUseCase.name,
