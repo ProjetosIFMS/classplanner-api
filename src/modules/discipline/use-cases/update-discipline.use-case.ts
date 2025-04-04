@@ -19,7 +19,7 @@ export class UpdateDisciplineUseCase {
   async execute(id: string, data: UpdateDisciplineDto) {
     try {
       const disciplineExists =
-        await this.findDisciplineByIdRepository.FindDisciplineById(id);
+        await this.findDisciplineByIdRepository.findDisciplineById(id);
       if (!disciplineExists) {
         const error = new NotFoundException('Discipline not found');
         this.logger.error(error.message);

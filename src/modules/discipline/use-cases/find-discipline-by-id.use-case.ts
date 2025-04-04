@@ -16,7 +16,7 @@ export class FindDisciplineByIdUseCase {
   async execute(id: string, includeModalities: boolean) {
     try {
       const disciplineExists =
-        await this.findDisciplineByIdRepository.FindDisciplineById(
+        await this.findDisciplineByIdRepository.findDisciplineById(
           id,
           includeModalities,
         );

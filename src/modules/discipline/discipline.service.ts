@@ -17,7 +17,7 @@ export class DisciplineService {
     private readonly createDisciplineUseCase: CreateDisciplineUseCase,
     private readonly deleteDisciplineUseCase: DeleteDisciplineUseCase,
     private readonly findAllDisciplinesUseCase: FindAllDisciplinesUseCase,
-    private readonly findDiscisciplineByIdUseCase: FindDisciplineByIdUseCase,
+    private readonly findDisciplineByIdUseCase: FindDisciplineByIdUseCase,
     private readonly findDisciplineByNameUseCase: FindDisciplinesByNameUseCase,
     private readonly updateDisciplineUseCase: UpdateDisciplineUseCase,
     private readonly findDisciplinesByCourseIdUseCase: FindDisciplinesByCourseIdUseCase,
@@ -32,10 +32,7 @@ export class DisciplineService {
   }
 
   async findDisciplineById(id: string, includeModalities: boolean) {
-    return await this.findDiscisciplineByIdUseCase.execute(
-      id,
-      includeModalities,
-    );
+    return await this.findDisciplineByIdUseCase.execute(id, includeModalities);
   }
 
   async findDisciplineByName(name: string, includeModalities: boolean) {

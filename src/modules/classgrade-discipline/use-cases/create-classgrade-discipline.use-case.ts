@@ -21,7 +21,7 @@ export class CreateClassgradeDisciplineUseCase {
   async execute(data: CreateClassgradeDisciplineDto) {
     try {
       const disciplineExists =
-        this.findDisciplineByIdRepository.FindDisciplineById(
+        this.findDisciplineByIdRepository.findDisciplineById(
           data.discipline_id,
         );
       const classGradeExists =
