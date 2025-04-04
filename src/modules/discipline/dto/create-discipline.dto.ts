@@ -1,11 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateDisciplineDto {
-  @ApiProperty()
-  @IsString()
-  id: string;
-
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -27,8 +29,9 @@ export class CreateDisciplineDto {
   area_id: string;
 
   @ApiProperty()
-  @IsString()
-  modality_id: string;
+  @IsArray()
+  @IsUUID(4, { each: true })
+  modalities_ids: string[];
 
   @ApiProperty()
   @IsString()
