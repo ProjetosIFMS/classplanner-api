@@ -1,0 +1,5 @@
+export enum HTTP_METHOD_TO_ACTION {
+  POST = 'CREATE',
+  PATCH = 'UPDATE',
+  DELETE = 'DELETE',
+}
