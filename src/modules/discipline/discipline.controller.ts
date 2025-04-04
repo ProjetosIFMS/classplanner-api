@@ -8,6 +8,8 @@ import {
   Delete,
   UseGuards,
   Query,
+  ParseBoolPipe,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { DisciplineService } from './discipline.service';
 import { CreateDisciplineDto } from './dto/create-discipline.dto';
@@ -32,14 +34,18 @@ export class DisciplineController {
 
   @Get()
   @Roles(Role.PROFESSOR)
-  findAll(@Query('includeModalities') includeModalities: boolean = false) {
+  findAll(
+    @Query('includeModalities', new DefaultValuePipe(false), ParseBoolPipe)
+    includeModalities: boolean,
+  ) {
     return this.disciplineService.findAll(includeModalities);
   }
 
   @Get(':course_id')
   findByCourseId(
     @Param('course_id') course_id: string,
-    @Query('includeModalities') includeModalities: boolean = false,
+    @Query('includeModalities', new DefaultValuePipe(false), ParseBoolPipe)
+    includeModalities: boolean,
   ) {
     return this.disciplineService.findDisciplinesByCourseId(
       course_id,
@@ -50,7 +56,8 @@ export class DisciplineController {
   @Get(':id')
   findOne(
     @Param('id') id: string,
-    @Query('includeModalities') includeModalities: boolean = false,
+    @Query('includeModalities', new DefaultValuePipe(false), ParseBoolPipe)
+    includeModalities: boolean,
   ) {
     return this.disciplineService.findDisciplineById(id, includeModalities);
   }
@@ -58,7 +65,8 @@ export class DisciplineController {
   @Get(':name')
   findByName(
     @Param('name') name: string,
-    @Query('includeModalities') includeModalities: boolean = false,
+    @Query('includeModalities', new DefaultValuePipe(false), ParseBoolPipe)
+    includeModalities: boolean,
   ) {
     return this.disciplineService.findDisciplineByName(name, includeModalities);
   }
