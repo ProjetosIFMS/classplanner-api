@@ -27,20 +27,32 @@ export class DisciplineService {
     return await this.createDisciplineUseCase.execute(data);
   }
 
-  async findAll() {
-    return await this.findAllDisciplinesUseCase.execute();
+  async findAll(includeModalities: boolean) {
+    return await this.findAllDisciplinesUseCase.execute(includeModalities);
   }
 
-  async findDisciplineById(id: string) {
-    return await this.findDiscisciplineByIdUseCase.execute(id);
+  async findDisciplineById(id: string, includeModalities: boolean) {
+    return await this.findDiscisciplineByIdUseCase.execute(
+      id,
+      includeModalities,
+    );
   }
 
-  async findDisciplineByName(name: string) {
-    return await this.findDisciplineByNameUseCase.execute(name);
+  async findDisciplineByName(name: string, includeModalities: boolean) {
+    return await this.findDisciplineByNameUseCase.execute(
+      name,
+      includeModalities,
+    );
   }
 
-  async findDisciplinesByCourseId(course_id: string) {
-    return await this.findDisciplinesByCourseIdUseCase.execute(course_id);
+  async findDisciplinesByCourseId(
+    course_id: string,
+    includeModalities: boolean,
+  ) {
+    return await this.findDisciplinesByCourseIdUseCase.execute(
+      course_id,
+      includeModalities,
+    );
   }
 
   async updateDiscipline(id: string, data: UpdateDisciplineDto) {

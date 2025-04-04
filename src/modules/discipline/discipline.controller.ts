@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { DisciplineService } from './discipline.service';
 import { CreateDisciplineDto } from './dto/create-discipline.dto';
@@ -31,23 +32,35 @@ export class DisciplineController {
 
   @Get()
   @Roles(Role.PROFESSOR)
-  findAll() {
-    return this.disciplineService.findAll();
+  findAll(@Query('includeModalities') includeModalities: boolean = false) {
+    return this.disciplineService.findAll(includeModalities);
   }
 
   @Get(':course_id')
-  findByCourseId(@Param('course_id') course_id: string) {
-    return this.disciplineService.findDisciplinesByCourseId(course_id);
+  findByCourseId(
+    @Param('course_id') course_id: string,
+    @Query('includeModalities') includeModalities: boolean = false,
+  ) {
+    return this.disciplineService.findDisciplinesByCourseId(
+      course_id,
+      includeModalities,
+    );
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.disciplineService.findDisciplineById(id);
+  findOne(
+    @Param('id') id: string,
+    @Query('includeModalities') includeModalities: boolean = false,
+  ) {
+    return this.disciplineService.findDisciplineById(id, includeModalities);
   }
 
   @Get(':name')
-  findByName(@Param('name') name: string) {
-    return this.disciplineService.findDisciplineByName(name);
+  findByName(
+    @Param('name') name: string,
+    @Query('includeModalities') includeModalities: boolean = false,
+  ) {
+    return this.disciplineService.findDisciplineByName(name, includeModalities);
   }
 
   @Patch(':id')

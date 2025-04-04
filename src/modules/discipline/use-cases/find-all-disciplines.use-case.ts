@@ -12,9 +12,11 @@ export class FindAllDisciplinesUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute() {
+  async execute(includeModalities: boolean) {
     try {
-      return await this.findAllDisciplinesRepository.findAllDisciplines();
+      return await this.findAllDisciplinesRepository.findAllDisciplines(
+        includeModalities,
+      );
     } catch (err) {
       new ServiceUnavailableException('Something bad happened', {
         cause: err,

@@ -15,7 +15,7 @@ export class FindDisciplinesByCourseIdUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(course_id: string) {
+  async execute(course_id: string, includeModalities: boolean) {
     try {
       const courseExists =
         this.findCourseByIdRepository.findCourseById(course_id);
@@ -27,6 +27,7 @@ export class FindDisciplinesByCourseIdUseCase {
       const disciplines =
         this.findDisciplinesByCourseIdRepository.findDisciplinesByCourseId(
           course_id,
+          includeModalities,
         );
       this.logger.log(
         'Disciplines found by course id',
