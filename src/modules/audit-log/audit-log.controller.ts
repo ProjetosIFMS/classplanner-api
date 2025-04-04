@@ -2,6 +2,7 @@ import {
   Controller,
   DefaultValuePipe,
   Get,
+  Param,
   ParseIntPipe,
   Query,
   Req,
@@ -33,10 +34,10 @@ export class AuditLogController {
     );
   }
 
-  @Get(':id')
+  @Get(':user_id')
   @Roles(Role.COORDINATOR)
   async findAuditLogsByUserId(
-    user_id: string,
+    @Param('user_id') user_id: string,
     @Query('maxListSize', new DefaultValuePipe(5), ParseIntPipe)
     maxListSize: number,
   ) {
