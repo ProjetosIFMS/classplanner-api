@@ -15,20 +15,24 @@ export class AuditLogInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
-    const auditData = {
-      action: HTTP_METHOD_TO_ACTION[request.method],
-      resource: '',
-      user_id: request.user.id,
-    };
-    console.log(request);
+    const response = context.switchToHttp().getResponse();
 
     if (
       ['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method) &&
       request.user
     ) {
       return next.handle().pipe(
-        tap(() => {
-          this.auditLogService.createAuditLog(auditData);
+        tap((response_body) => {
+          if (response.statusCode >= 200 && response.statusCode < 300) {
+            const auditData = {
+              action: HTTP_METHOD_TO_ACTION[request.method],
+              url: request.url,
+              resource_id: response_body.id || null,
+              user_id: request.user.id,
+            };
+
+            this.auditLogService.createAuditLog(auditData);
+          }
         }),
       );
     }

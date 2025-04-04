@@ -2,6 +2,7 @@ import { AUDITLOG_ACTION } from '@prisma/client';
 
 export type CreateAuditLogInput = {
   action: AUDITLOG_ACTION;
-  resource: string;
+  url: string;
+  resource_id: string;
   user_id: string;
 };
