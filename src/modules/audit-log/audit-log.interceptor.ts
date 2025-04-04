@@ -17,10 +17,7 @@ export class AuditLogInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest();
     const response = context.switchToHttp().getResponse();
 
-    if (
-      ['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method) &&
-      request.user
-    ) {
+    if (['POST', 'PATCH', 'DELETE'].includes(request.method) && request.user) {
       return next.handle().pipe(
         tap((response_body) => {
           if (response.statusCode >= 200 && response.statusCode < 300) {
