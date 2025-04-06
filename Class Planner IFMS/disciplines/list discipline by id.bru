@@ -1,0 +1,15 @@
+meta {
+  name: list discipline by id
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{base_url}}/discipline/5e780c26-e776-4f6b-b1a7-f5c5459692bb?includeModalities=true
+  body: none
+  auth: none
+}
+
+params:query {
+  includeModalities: true
+}

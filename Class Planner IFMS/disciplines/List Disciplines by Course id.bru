@@ -1,11 +1,15 @@
 meta {
   name: List Disciplines by Course id
   type: http
-  seq: 5
+  seq: 3
 }
 
 get {
-  url: {{base_url}}/discipline/
+  url: {{base_url}}/discipline/c0692e9d-dfeb-47d2-a7dc-9bc54ed968fa?includeModalities=true
   body: none
   auth: inherit
+}
+
+params:query {
+  includeModalities: true
 }

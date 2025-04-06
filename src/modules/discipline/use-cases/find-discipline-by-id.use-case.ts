@@ -13,10 +13,13 @@ export class FindDisciplineByIdUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(id: string) {
+  async execute(id: string, includeModalities: boolean) {
     try {
       const disciplineExists =
-        await this.findDisciplineByIdRepository.FindDisciplineById(id);
+        await this.findDisciplineByIdRepository.findDisciplineById(
+          id,
+          includeModalities,
+        );
 
       if (!disciplineExists) {
         const error = new NotFoundException('Discipline not found');

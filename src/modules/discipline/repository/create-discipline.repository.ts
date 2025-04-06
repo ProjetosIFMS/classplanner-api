@@ -7,8 +7,15 @@ export class CreateDisciplineRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async createDiscipline(data: CreateDisciplineInput) {
+    const { modalities_ids, ...disciplineData } = data;
+
     return await this.prisma.discipline.create({
-      data,
+      data: {
+        ...disciplineData,
+        Modality: {
+          connect: modalities_ids?.map((id) => ({ id })),
+        },
+      },
     });
   }
 }

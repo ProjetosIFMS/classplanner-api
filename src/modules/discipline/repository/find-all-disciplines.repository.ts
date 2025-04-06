@@ -5,7 +5,11 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class FindAllDisciplinesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAllDisciplines() {
-    return await this.prisma.discipline.findMany();
+  async findAllDisciplines(includeModalities: boolean = false) {
+    return await this.prisma.discipline.findMany({
+      include: {
+        Modality: includeModalities ? true : false,
+      },
+    });
   }
 }

@@ -7,9 +7,18 @@ export class UpdateDisciplineRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async updateDiscipline(id: string, data: UpdateDisciplineInput) {
+    const { modalities_ids, ...disciplineData } = data;
     return await this.prisma.discipline.update({
       where: { id },
-      data,
+      data: {
+        ...disciplineData,
+        ...(modalities_ids && {
+          Modality: {
+            set: [],
+            connect: modalities_ids.map((id) => ({ id })),
+          },
+        }),
+      },
     });
   }
 }

@@ -18,7 +18,7 @@ export class DeleteDisciplineUseCase {
   async execute(id: string) {
     try {
       const disciplineExists =
-        await this.findDisciplineByIdRepository.FindDisciplineById(id);
+        await this.findDisciplineByIdRepository.findDisciplineById(id);
       if (!disciplineExists) {
         const error = new NotFoundException('Discipline not found');
         throw error;

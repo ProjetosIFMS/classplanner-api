@@ -8,10 +8,13 @@ export class FindDisciplinesByNameUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(name: string) {
+  async execute(name: string, includeModalities: boolean) {
     try {
       const disciplinesExists =
-        await this.findDisciplineByNameRepository.findDisciplineByName(name);
+        await this.findDisciplineByNameRepository.findDisciplineByName(
+          name,
+          includeModalities,
+        );
 
       if (!disciplinesExists) {
         const error = new NotFoundException('Discipline not found');

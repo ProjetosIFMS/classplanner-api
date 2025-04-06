@@ -1,17 +1,20 @@
 meta {
   name: update discipline
   type: http
-  seq: 4
+  seq: 6
 }
 
 patch {
-  url: {{base_url}}/discipline/852f6abd-b717-48ef-a48d-80e745864a1a
+  url: {{base_url}}/discipline/c7e78a9e-dbe7-43cd-8a7d-755582e37051
   body: json
   auth: inherit
 }
 
 body:json {
   {
-    "name": "Redes de computadores"
+    "name": "Redes de computadores",
+    "modalities_ids": [
+      "c7f4cb10-9315-4fc0-a78d-56589618607a"
+    ]
   }
 }

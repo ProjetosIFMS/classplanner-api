@@ -1,0 +1,15 @@
+meta {
+  name: list disciplines by name
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{base_url}}/discipline/Algoritmos e Lógica de Programação?includeModalities=true
+  body: none
+  auth: none
+}
+
+params:query {
+  includeModalities: true
+}

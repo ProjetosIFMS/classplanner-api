@@ -5,9 +5,12 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class FindDisciplineByIdRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async FindDisciplineById(id: string) {
+  async findDisciplineById(id: string, includeModalities: boolean = false) {
     return await this.prisma.discipline.findUnique({
       where: { id },
+      include: {
+        Modality: includeModalities ? true : false,
+      },
     });
   }
 }
