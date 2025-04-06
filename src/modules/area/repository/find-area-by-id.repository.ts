@@ -7,6 +7,10 @@ export class FindAreaByIdRepository {
   async findAreaById(id: string) {
     const area = await this.prisma.area.findUnique({
       where: { id },
+      include: {
+        User: true,
+        Discipline: true,
+      },
     });
 
     return area;
