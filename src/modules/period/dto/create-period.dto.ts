@@ -7,10 +7,6 @@ export class CreatePeriodDto {
   id: string;
 
   @ApiProperty()
-  @IsString()
-  name: string;
-
-  @ApiProperty()
   @IsDateString()
   start_date: Date;
 

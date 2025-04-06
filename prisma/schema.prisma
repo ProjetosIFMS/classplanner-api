@@ -115,7 +115,6 @@ model ProfessorClassGrade {
 
 model Period {
   id                   String                 @id @unique @default(uuid())
-  name                 String
   start_date           DateTime
   end_date             DateTime
   ClassGradeDiscipline ClassGradeDiscipline[]

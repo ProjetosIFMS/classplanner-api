@@ -33,7 +33,7 @@ export class DisciplineController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR)
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAll(
     @Query('includeModalities', new DefaultValuePipe(false), ParseBoolPipe)
     includeModalities: boolean,
