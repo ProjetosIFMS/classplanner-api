@@ -18,6 +18,7 @@ import { UploadModule } from './shared/utils/uploads/uploads.module';
 import { DayoffModule } from './modules/dayoff/dayoff.module';
 import { AuditLogInterceptor } from 'src/modules/audit-log/audit-log.interceptor';
 import { AuditLogModule } from 'src/modules/audit-log/audit-log.module';
+import { InterestSelectionModule } from './modules/interest-selection/interest-selection.module';
 @Module({
   imports: [
     AuthModule,
@@ -33,6 +34,7 @@ import { AuditLogModule } from 'src/modules/audit-log/audit-log.module';
     UploadModule,
     DayoffModule,
     AuditLogModule,
+    InterestSelectionModule,
   ],
   controllers: [AppController],
   providers: [
