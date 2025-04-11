@@ -7,8 +7,16 @@ export class CreateInterestSelectionRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async createInterestSelection(data: CreateInterestSelectionInput) {
-    return await this.prisma.professorInterest.create({
-      data,
-    });
+    return await Promise.all(
+      data.discipline_id.map((disciplineId) =>
+        this.prisma.professorInterest.create({
+          data: {
+            discipline_id: disciplineId,
+            status: data.status,
+            user_id: data.user_id,
+          },
+        }),
+      ),
+    );
   }
 }

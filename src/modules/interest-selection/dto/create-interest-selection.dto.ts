@@ -13,7 +13,7 @@ export class CreateInterestSelectionDto {
   @IsString()
   @IsUUID()
   @IsNotEmpty()
-  discipline_id: string;
+  discipline_id: string[];
 
   @ApiProperty({ enum: Status })
   @IsIn(Status)
