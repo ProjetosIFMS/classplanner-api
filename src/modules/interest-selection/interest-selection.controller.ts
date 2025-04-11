@@ -24,6 +24,11 @@ export class InterestSelectionController {
     return this.interestSelectionService.findByProfessor(professor_id);
   }
 
+  @Get('/discipline/:discipline_id')
+  findInterests(@Param('discipline_id') discipline_id: string) {
+    return this.interestSelectionService.findInterests(discipline_id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.interestSelectionService.findOne(id);

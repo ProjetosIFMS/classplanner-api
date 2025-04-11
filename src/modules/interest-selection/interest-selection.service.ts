@@ -4,6 +4,7 @@ import { UpdateInterestSelectionDto } from './dto/update-interest-selection.dto'
 import {
   CreateInterestSelectionUseCase,
   FindAllInterestSelectionsUseCase,
+  FindInterestsByDisciplineIdUseCase,
   FindInterestSelectionByIdUseCase,
   FindInterestSelectionByProfessorIdUseCase,
   UpdateInterestSelectionUseCase,
@@ -17,6 +18,7 @@ export class InterestSelectionService {
     private readonly findAllInterestSelectionUseCase: FindAllInterestSelectionsUseCase,
     private readonly findInterestSelectionByIdUseCase: FindInterestSelectionByIdUseCase,
     private readonly findInterestSelecionByProfessorIdUseCase: FindInterestSelectionByProfessorIdUseCase,
+    private readonly findInterestsByDisciplineIdUseCase: FindInterestsByDisciplineIdUseCase,
   ) {}
 
   create(data: CreateInterestSelectionDto) {
@@ -37,5 +39,9 @@ export class InterestSelectionService {
 
   findByProfessor(id: string) {
     return this.findInterestSelecionByProfessorIdUseCase.execute(id);
+  }
+
+  findInterests(id: string) {
+    return this.findInterestsByDisciplineIdUseCase.execute(id);
   }
 }
