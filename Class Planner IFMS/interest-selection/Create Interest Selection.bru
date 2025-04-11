@@ -1,0 +1,19 @@
+meta {
+  name: Create Interest Selection
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/interest-selection/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "user_id": "c491c4e5-9739-4d14-9161-2daae87ef9ea",
+    "discipline_id": "fc125f1d-0c7f-457b-a287-d66a1a79707f",
+    "status": "ACTIVE"
+  }
+}
