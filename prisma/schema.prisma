@@ -21,6 +21,7 @@ model User {
   ProfessorClassGrade ProfessorClassGrade[]
   Dayoff              Dayoff?
   AuditLog            AuditLog[]
+  ProfessorInterest   ProfessorInterest[]
 
   @@index([area_id])
 }
@@ -81,6 +82,7 @@ model Discipline {
   Modality               Modality[]
   DisciplineModality     DisciplineModality[]
   ClassGrade             ClassGradeDiscipline[]
+  interestedProfessors   ProfessorInterest[]    
 
   @@index([area_id])
   @@index([pedagogical_project_id])
@@ -181,6 +183,17 @@ model AuditLog {
   @@index([user_id])
 }
 
+model ProfessorInterest {
+  id          String          @id @unique @default(uuid())
+  user_id         String       
+  discipline_id   String
+  created_at      DateTime         @default(now())
+  status          INTEREST_STATUS  @default(PENDING)
+  Professor       User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  Discipline      Discipline       @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
+
+}
+
 enum ROLE {
   PROFESSOR
   COORDINATOR
@@ -201,6 +214,14 @@ enum WEEKDAY {
   FRIDAY
   SATURDAY
   SUNDAY
+}
+
+
+enum INTEREST_STATUS {
+  ACTIVE
+  INACTIVE
+  PENDING
+  APPROVED
 }
 
 enum AUDITLOG_ACTION {
