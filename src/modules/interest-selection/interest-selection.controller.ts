@@ -20,7 +20,7 @@ export class InterestSelectionController {
   }
 
   @Get(':professor_id')
-  findByProfessor(@Param('id') professor_id: string) {
+  findByProfessor(@Param('professor_id') professor_id: string) {
     return this.interestSelectionService.findByProfessor(professor_id);
   }
 

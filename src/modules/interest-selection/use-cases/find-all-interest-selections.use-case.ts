@@ -1,7 +1,6 @@
 import {
   Injectable,
   Logger,
-  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { FindAllInterestSelections } from '../repository/find-all-interest-selections.repository';
@@ -18,13 +17,6 @@ export class FindAllInterestSelectionsUseCase {
       const interests =
         await this.findAllInterestSelectionsRepository.findAll();
 
-      if (!interests) {
-        this.logger.error(
-          'Any interest found',
-          FindAllInterestSelectionsUseCase.name,
-        );
-        throw new NotFoundException('Any interest found');
-      }
       this.logger.log('Interests found', FindAllInterestSelectionsUseCase.name);
 
       return interests;

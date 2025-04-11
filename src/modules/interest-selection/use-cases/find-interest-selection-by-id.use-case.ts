@@ -23,7 +23,7 @@ export class FindInterestSelectionByIdUseCase {
           'Interest selection not found',
           FindInterestSelectionByIdUseCase.name,
         );
-        throw new NotFoundException('Interest selection found');
+        throw new NotFoundException('Interest selection not found');
       }
       this.logger.log('Interest found', FindInterestSelectionByIdUseCase.name);
 
