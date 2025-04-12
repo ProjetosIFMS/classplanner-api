@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsIn, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsArray, IsIn, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 import { INTEREST_STATUS, Status } from '../types/interest_status';
 
 export class CreateInterestSelectionDto {
@@ -12,6 +12,7 @@ export class CreateInterestSelectionDto {
   @ApiProperty()
   @IsString()
   @IsUUID()
+  @IsArray()
   @IsNotEmpty()
   discipline_id: string[];
 
