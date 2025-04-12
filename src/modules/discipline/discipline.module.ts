@@ -10,6 +10,7 @@ import { FindDisciplineByNameRepository } from './repository/find-discipline-by-
 import * as UseCases from './use-cases';
 import { CourseModule } from '../course/course.module';
 import { FindDisciplinesByCourseIdRepository } from './repository/find-disciplines-by-course-id.repository';
+import { FindAllModalitiesRepository } from 'src/modules/modality/repository/find-all-modalities.repository';
 
 const usecases = Object.values(UseCases);
 
@@ -24,6 +25,7 @@ const usecases = Object.values(UseCases);
     FindDisciplineByIdRepository,
     FindDisciplineByNameRepository,
     FindDisciplinesByCourseIdRepository,
+    FindAllModalitiesRepository,
     DisciplineService,
     ...usecases,
     Logger,
