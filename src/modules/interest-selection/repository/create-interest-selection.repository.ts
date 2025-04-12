@@ -8,7 +8,7 @@ export class CreateInterestSelectionRepository {
 
   async createInterestSelection(data: CreateInterestSelectionInput) {
     return await Promise.all(
-      data.discipline_id.map((disciplineId) =>
+      data.disciplines_ids.map((disciplineId) =>
         this.prisma.professorInterest.create({
           data: {
             discipline_id: disciplineId,

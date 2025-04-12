@@ -25,7 +25,7 @@ export class CreateInterestSelectionUseCase {
 
       if (
         relatedInterests.some((discipline) =>
-          data.discipline_id.includes(discipline.discipline_id),
+          data.disciplines_ids.includes(discipline.discipline_id),
         )
       ) {
         throw new ConflictException(

@@ -10,11 +10,10 @@ export class CreateInterestSelectionDto {
   user_id: string;
 
   @ApiProperty()
-  @IsString()
-  @IsUUID()
   @IsArray()
+  @IsUUID(4, { each: true })
   @IsNotEmpty()
-  discipline_id: string[];
+  disciplines_ids: string[];
 
   @ApiProperty({ enum: Status })
   @IsIn(Status)
