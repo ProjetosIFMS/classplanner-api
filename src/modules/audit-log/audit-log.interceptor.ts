@@ -4,6 +4,7 @@ import {
   ExecutionContext,
   CallHandler,
 } from '@nestjs/common';
+import { isArray } from 'class-validator';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuditLogService } from 'src/modules/audit-log/audit-log.service';
@@ -21,14 +22,27 @@ export class AuditLogInterceptor implements NestInterceptor {
       return next.handle().pipe(
         tap((response_body) => {
           if (response.statusCode >= 200 && response.statusCode < 300) {
-            const auditData = {
-              action: HTTP_METHOD_TO_ACTION[request.method],
-              url: request.url,
-              resource_id: response_body.id || null,
-              user_id: request.user.id,
-            };
+            if (isArray(response_body)) {
+              response_body.forEach((item) => {
+                const auditData = {
+                  action: HTTP_METHOD_TO_ACTION[request.method],
+                  url: request.url,
+                  resource_id: item.id || null,
+                  user_id: request.user.id,
+                };
 
-            this.auditLogService.createAuditLog(auditData);
+                this.auditLogService.createAuditLog(auditData);
+              });
+            } else {
+              const auditData = {
+                action: HTTP_METHOD_TO_ACTION[request.method],
+                url: request.url,
+                resource_id: response_body.id || null,
+                user_id: request.user.id,
+              };
+
+              this.auditLogService.createAuditLog(auditData);
+            }
           }
         }),
       );
