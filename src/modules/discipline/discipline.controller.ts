@@ -37,8 +37,10 @@ export class DisciplineController {
   findAll(
     @Query('includeModalities', new DefaultValuePipe(false), ParseBoolPipe)
     includeModalities: boolean,
+    @Query('includeInterests', new DefaultValuePipe(false), ParseBoolPipe)
+    includeInterests: boolean = false,
   ) {
-    return this.disciplineService.findAll(includeModalities);
+    return this.disciplineService.findAll(includeModalities, includeInterests);
   }
 
   @Get(':course_id')

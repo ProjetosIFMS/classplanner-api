@@ -27,8 +27,11 @@ export class DisciplineService {
     return await this.createDisciplineUseCase.execute(data);
   }
 
-  async findAll(includeModalities: boolean) {
-    return await this.findAllDisciplinesUseCase.execute(includeModalities);
+  async findAll(includeModalities: boolean, includeInterests: boolean) {
+    return await this.findAllDisciplinesUseCase.execute(
+      includeModalities,
+      includeInterests,
+    );
   }
 
   async findDisciplineById(id: string, includeModalities: boolean) {
