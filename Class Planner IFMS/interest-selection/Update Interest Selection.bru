@@ -1,0 +1,17 @@
+meta {
+  name: Update Interest Selection
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{base_url}}/interest-selection/0de8bb88-89a1-4b46-81b2-787598c5bd70
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+   "status": "INACTIVE" 
+  }
+}

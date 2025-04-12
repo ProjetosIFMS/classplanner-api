@@ -12,10 +12,11 @@ export class FindAllDisciplinesUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(includeModalities: boolean) {
+  async execute(includeModalities: boolean, includeInterests: boolean) {
     try {
       return await this.findAllDisciplinesRepository.findAllDisciplines(
         includeModalities,
+        includeInterests,
       );
     } catch (err) {
       new ServiceUnavailableException('Something bad happened', {
