@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{base_url}}/discipline
+  url: {{base_url}}/discipline?includeInterests=true
   body: none
   auth: inherit
+}
+
+params:query {
+  includeInterests: true
 }
