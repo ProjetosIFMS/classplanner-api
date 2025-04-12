@@ -192,6 +192,8 @@ model ProfessorInterest {
   Professor       User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Discipline      Discipline       @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
 
+  @@unique([user_id, discipline_id])
+
 }
 
 enum ROLE {
