@@ -21,8 +21,8 @@ export class InterestSelectionService {
     private readonly findInterestsByDisciplineIdUseCase: FindInterestsByDisciplineIdUseCase,
   ) {}
 
-  create(data: CreateInterestSelectionDto) {
-    return this.createInterestSelectionUseCase.execute(data);
+  create(user_id: string, data: CreateInterestSelectionDto) {
+    return this.createInterestSelectionUseCase.execute(user_id, data);
   }
 
   update(id: string, data: UpdateInterestSelectionDto) {
