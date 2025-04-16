@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Req } from '@nestjs/common';
 import { InterestSelectionService } from './interest-selection.service';
 import { CreateInterestSelectionDto } from './dto/create-interest-selection.dto';
 import { UpdateInterestSelectionDto } from './dto/update-interest-selection.dto';
@@ -10,8 +10,14 @@ export class InterestSelectionController {
   ) {}
 
   @Post()
-  create(@Body() createInterestSelectionDto: CreateInterestSelectionDto) {
-    return this.interestSelectionService.create(createInterestSelectionDto);
+  create(
+    @Req() req: any,
+    @Body() createInterestSelectionDto: CreateInterestSelectionDto,
+  ) {
+    return this.interestSelectionService.create(
+      req.user.id,
+      createInterestSelectionDto,
+    );
   }
 
   @Get()

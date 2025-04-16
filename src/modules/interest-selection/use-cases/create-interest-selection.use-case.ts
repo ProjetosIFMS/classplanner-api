@@ -16,12 +16,10 @@ export class CreateInterestSelectionUseCase {
     private readonly logger: Logger,
   ) {}
 
-  async execute(data: CreateInterestSelectionDto) {
+  async execute(user_id: string, data: CreateInterestSelectionDto) {
     try {
       const relatedInterests =
-        await this.findInterestByProfessorIdRepository.findInterests(
-          data.user_id,
-        );
+        await this.findInterestByProfessorIdRepository.findInterests(user_id);
 
       if (
         relatedInterests.some((discipline) =>
@@ -35,6 +33,7 @@ export class CreateInterestSelectionUseCase {
 
       const createdInterest =
         await this.createInterestSelectionRepository.createInterestSelection(
+          user_id,
           data,
         );
       this.logger.log(
