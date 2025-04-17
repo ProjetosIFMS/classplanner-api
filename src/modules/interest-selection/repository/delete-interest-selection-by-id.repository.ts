@@ -5,7 +5,7 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class DeleteInterestSelectionById {
   constructor(private readonly prisma: PrismaService) {}
 
-  async DeleteInterestSelectionById(id: string) {
+  async deleteInterestSelectionById(id: string) {
     return await this.prisma.professorInterest.delete({ where: { id } });
   }
 }

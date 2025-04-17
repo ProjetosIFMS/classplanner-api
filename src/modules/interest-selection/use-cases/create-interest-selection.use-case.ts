@@ -59,7 +59,7 @@ export class CreateInterestSelectionUseCase {
               (interest) => interest.discipline_id === discipline_id,
             )?.id;
             if (interestIdToDelete) {
-              return await this.deleteInterestByIdRepository.DeleteInterestSelectionById(
+              return await this.deleteInterestByIdRepository.deleteInterestSelectionById(
                 interestIdToDelete,
               );
             }
