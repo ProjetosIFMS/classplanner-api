@@ -25,6 +25,11 @@ export class InterestSelectionController {
     return this.interestSelectionService.findAll();
   }
 
+  @Get('me')
+  findMyInterests(@Req() req: any) {
+    return this.interestSelectionService.findByProfessor(req.user.id);
+  }
+
   @Get(':professor_id')
   findByProfessor(@Param('professor_id') professor_id: string) {
     return this.interestSelectionService.findByProfessor(professor_id);
