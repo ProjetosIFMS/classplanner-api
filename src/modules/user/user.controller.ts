@@ -32,7 +32,7 @@ export class UserController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR)
+  @Roles(Role.PROFESSOR, Role.COORDINATOR)
   async findAll() {
     return await this.userService.findAll();
   }
