@@ -9,6 +9,7 @@ import {
   UseGuards,
   Query,
   Req,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { DayoffService } from './dayoff.service';
 import { CreateDayoffDto } from './dto/create-dayoff.dto';
@@ -37,8 +38,8 @@ export class DayoffController {
   @Get()
   @Roles(Role.COORDINATOR)
   findAllDayoffs(
-    @Query('status') status: DAYOFF_STATUS | '' = '',
-    @Query('weekday') weekday: WEEKDAY | '' = '',
+    @Query('status', new DefaultValuePipe('')) status: DAYOFF_STATUS | '',
+    @Query('weekday', new DefaultValuePipe('')) weekday: WEEKDAY | '',
   ) {
     return this.dayoffService.findAllDayoffs(status, weekday);
   }
