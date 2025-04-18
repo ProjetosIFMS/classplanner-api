@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Dayoff" ALTER COLUMN "reason" DROP NOT NULL,
+ALTER COLUMN "weekday" DROP NOT NULL;
