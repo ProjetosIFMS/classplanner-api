@@ -1,8 +1,8 @@
 import { WEEKDAY } from 'src/modules/dayoff/dto/weekday';
 
 export type CreateDayoffInput = {
-  reason: string;
+  reason?: string;
   schedule: string;
   frequency: string;
-  weekday: WEEKDAY;
+  weekday?: WEEKDAY;
 };

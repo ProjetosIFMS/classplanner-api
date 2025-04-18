@@ -7,7 +7,7 @@ export class CreateDayoffDto {
   @IsString()
   @IsNotEmpty()
   @Length(3, 255)
-  reason: string;
+  reason?: string;
 
   @ApiProperty()
   @IsString()
@@ -24,5 +24,5 @@ export class CreateDayoffDto {
   @ApiProperty({ enum: WEEKDAY })
   @IsEnum(WEEKDAY)
   @IsNotEmpty()
-  weekday: WEEKDAY;
+  weekday?: WEEKDAY;
 }
