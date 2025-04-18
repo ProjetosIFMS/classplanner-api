@@ -29,11 +29,13 @@ export class CreateDayoffUseCase {
         );
       }
 
-      const dayoff = await this.createDayoffRepository.createDayoff(
-        user_id,
-        data,
-      );
-      this.logger.log('Dayoff created');
+      const dayoff = await this.createDayoffRepository.createDayoff(user_id, {
+        reason: data.reason,
+        schedule: data.schedule,
+        frequency: data.frequency,
+        weekday: data.weekday,
+      });
+      this.logger.log('Dayoff created', CreateDayoffUseCase.name);
       return dayoff;
     } catch (err) {
       if (err instanceof ConflictException) {
@@ -53,7 +55,7 @@ export class CreateDayoffUseCase {
         cause: err,
         description: 'Error creating dayoff',
       });
-      this.logger.error(error.message, CreateDayoffUseCase.name);
+      this.logger.error(err, CreateDayoffUseCase.name);
       throw error;
     }
   }

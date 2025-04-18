@@ -159,10 +159,10 @@ model Area {
 
 model Dayoff {
   id         String        @id @unique @default(uuid())
-  reason     String
+  reason     String?
   schedule   String
   frequency  String
-  weekday    WEEKDAY
+  weekday    WEEKDAY?
   created_at DateTime      @default(now())
   updated_at DateTime      @updatedAt
   status     DAYOFF_STATUS @default(PENDING)

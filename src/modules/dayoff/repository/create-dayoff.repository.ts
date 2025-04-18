@@ -10,7 +10,10 @@ export class CreateDayoffRepository {
     return await this.prisma.dayoff.create({
       data: {
         user_id,
-        ...data,
+        reason: data.reason,
+        schedule: data.schedule,
+        frequency: data.frequency,
+        weekday: data.weekday,
       },
     });
   }

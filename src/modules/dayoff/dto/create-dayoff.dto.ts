@@ -1,13 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsEnum, IsNotEmpty, Length } from 'class-validator';
+import {
+  IsString,
+  IsEnum,
+  IsNotEmpty,
+  Length,
+  IsOptional,
+} from 'class-validator';
 import { WEEKDAY } from 'src/modules/dayoff/dto/weekday';
 
 export class CreateDayoffDto {
   @ApiProperty()
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
   @Length(3, 255)
-  reason: string;
+  reason?: string;
 
   @ApiProperty()
   @IsString()
@@ -22,7 +29,8 @@ export class CreateDayoffDto {
   frequency: string;
 
   @ApiProperty({ enum: WEEKDAY })
+  @IsOptional()
   @IsEnum(WEEKDAY)
   @IsNotEmpty()
-  weekday: WEEKDAY;
+  weekday?: WEEKDAY;
 }
