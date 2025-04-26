@@ -7,13 +7,13 @@ import {
 } from '@nestjs/common';
 import { PrismaClientValidationError } from '@prisma/client/runtime/library';
 import { UpdateDayoffDto } from 'src/modules/dayoff/dto/update-dayoff.dto';
-import { FindDayoffByIdRepository } from 'src/modules/dayoff/repository/find-dayoff-by-id.repository';
+import { FindDayoffByUserIdRepository } from 'src/modules/dayoff/repository/find-dayoff-by-user-id.repository';
 import { UpdateDayoffRepository } from 'src/modules/dayoff/repository/update-dayoff.repository';
 
 @Injectable()
 export class UpdateDayoffUseCase {
   constructor(
-    private readonly findDayoffByIdRepository: FindDayoffByIdRepository,
+    private readonly findDayoffByUserIdRepository: FindDayoffByUserIdRepository,
     private readonly updateDayoffRepository: UpdateDayoffRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
@@ -21,7 +21,7 @@ export class UpdateDayoffUseCase {
   async execute(id: string, data: UpdateDayoffDto) {
     try {
       const dayoffExists =
-        await this.findDayoffByIdRepository.findDayoffById(id);
+        await this.findDayoffByUserIdRepository.findDayoffByUserId(id);
 
       if (!dayoffExists) {
         const error = new NotFoundException('Dayoff not found');
@@ -29,7 +29,10 @@ export class UpdateDayoffUseCase {
         throw error;
       }
 
-      const dayoff = await this.updateDayoffRepository.updateDayoff(id, data);
+      const dayoff = await this.updateDayoffRepository.updateDayoff(
+        dayoffExists.id,
+        data,
+      );
       this.logger.log('Dayoff updated');
       return dayoff;
     } catch (err) {
