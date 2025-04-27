@@ -35,6 +35,11 @@ export class CreateInterestSelectionUseCase {
             !existingInterestsDisciplinesIds.includes(discipline_id),
         );
 
+      const interestsDisciplinesIdsToActivate: string[] =
+        existingInterestsDisciplinesIds.filter((discipline_id) =>
+          data.disciplines_ids.includes(discipline_id),
+        );
+
       const interestsDisciplinesIdsToInactivate: string[] =
         existingInterestsDisciplinesIds.filter(
           (discipline_id) => !data.disciplines_ids.includes(discipline_id),
@@ -52,6 +57,27 @@ export class CreateInterestSelectionUseCase {
             },
           )),
         );
+      }
+
+      if (interestsDisciplinesIdsToActivate.length > 0) {
+        const activatedInterests = await Promise.all(
+          interestsDisciplinesIdsToActivate.map(async (discipline_id) => {
+            const interestIdToActivate = existingInterests.find(
+              (interest) => interest.discipline_id === discipline_id,
+            )?.id;
+            if (interestIdToActivate) {
+              return await this.updateInterestRepository.updateInterestSelection(
+                interestIdToActivate,
+                {
+                  status: 'ACTIVE',
+                },
+              );
+            }
+            return null;
+          }),
+        );
+
+        returningInterests.push(...activatedInterests.filter(Boolean));
       }
 
       if (interestsDisciplinesIdsToInactivate.length > 0) {
