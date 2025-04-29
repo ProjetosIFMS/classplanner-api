@@ -26,7 +26,7 @@ export class AuditLogController {
   async findMyAuditLogs(
     @Req() req: any,
     @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
     return await this.auditLogService.getAuditLogsByUserId(
       req.user.id,
