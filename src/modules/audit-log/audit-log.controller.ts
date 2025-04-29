@@ -25,12 +25,13 @@ export class AuditLogController {
   @Get('me')
   async findMyAuditLogs(
     @Req() req: any,
-    @Query('maxListSize', new DefaultValuePipe(5), ParseIntPipe)
-    maxListSize: number,
+    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page,
   ) {
     return await this.auditLogService.getAuditLogsByUserId(
       req.user.id,
-      maxListSize,
+      pageSize,
+      page,
     );
   }
 
@@ -38,12 +39,14 @@ export class AuditLogController {
   @Roles(Role.COORDINATOR)
   async findAuditLogsByUserId(
     @Param('user_id') user_id: string,
-    @Query('maxListSize', new DefaultValuePipe(5), ParseIntPipe)
-    maxListSize: number,
+    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe)
+    pageSize: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
     return await this.auditLogService.getAuditLogsByUserId(
       user_id,
-      maxListSize,
+      pageSize,
+      page,
     );
   }
 }
