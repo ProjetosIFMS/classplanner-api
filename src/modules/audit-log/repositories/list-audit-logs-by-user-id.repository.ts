@@ -15,13 +15,14 @@ export class ListAuditLogsByUserIdRepository {
 
     const [data, total] = await this.prisma.$transaction([
       this.prisma.auditLog.findMany({
+        where: { user_id },
         skip: Number(skip),
         take: Number(pageSize),
         orderBy: {
           created_at: 'desc',
         },
       }),
-      this.prisma.auditLog.count(),
+      this.prisma.auditLog.count({ where: { user_id } }),
     ]);
 
     return {
