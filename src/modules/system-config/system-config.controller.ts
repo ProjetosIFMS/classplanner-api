@@ -7,7 +7,7 @@ import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'prisma/seed';
 
-@ApiTags('professor-classgrade')
+@ApiTags('system-config')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Controller('system-config')
 export class SystemConfigController {
