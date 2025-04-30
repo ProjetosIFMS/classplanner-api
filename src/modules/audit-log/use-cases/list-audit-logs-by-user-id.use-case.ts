@@ -15,7 +15,7 @@ export class ListAuditLogsByUserIdUseCase {
     private readonly logger: Logger,
   ) {}
 
-  async execute(user_id: string, pageSize: number, page) {
+  async execute(user_id: string, pageSize: number, page: number) {
     try {
       const user = await this.findUserByIdRepository.findUserById(user_id);
       if (!user) {
