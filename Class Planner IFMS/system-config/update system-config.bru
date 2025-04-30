@@ -1,0 +1,18 @@
+meta {
+  name: update system-config
+  type: http
+  seq: 2
+}
+
+patch {
+  url: {{base_url}}/system-config
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "discipline_selection_mode": "INTEREST",
+    "discipline_selection_mode_expires_at": "2025-04-30T21:17:20.200Z"
+  }
+}

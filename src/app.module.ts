@@ -19,6 +19,9 @@ import { DayoffModule } from './modules/dayoff/dayoff.module';
 import { AuditLogInterceptor } from 'src/modules/audit-log/audit-log.interceptor';
 import { AuditLogModule } from 'src/modules/audit-log/audit-log.module';
 import { InterestSelectionModule } from './modules/interest-selection/interest-selection.module';
+import { SystemConfigModule } from './modules/system-config/system-config.module';
+import { ScheduleModule } from '@nestjs/schedule';
+
 @Module({
   imports: [
     AuthModule,
@@ -35,6 +38,8 @@ import { InterestSelectionModule } from './modules/interest-selection/interest-s
     DayoffModule,
     AuditLogModule,
     InterestSelectionModule,
+    SystemConfigModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [
