@@ -1,15 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/shared/databases/prisma.database';
+import { AuditLogPagination } from 'src/shared/interfaces/audit-log-pagination';
 
 @Injectable()
 export class ListAuditLogsByUserIdRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async ListAuditLogsByUserId(user_id: string, maxListSize: number = 5) {
-    return await this.prisma.auditLog.findMany({
-      where: { user_id },
-      take: maxListSize,
-      orderBy: { created_at: 'desc' },
-    });
+  async ListAuditLogsByUserId(
+    user_id: string,
+    pageSize: number,
+    page: number,
+  ): Promise<AuditLogPagination> {
+    const skip = (page - 1) * pageSize;
+
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.auditLog.findMany({
+        where: { user_id },
+        skip: Number(skip),
+        take: Number(pageSize),
+        orderBy: {
+          created_at: 'desc',
+        },
+      }),
+      this.prisma.auditLog.count({ where: { user_id } }),
+    ]);
+
+    return {
+      data,
+      total,
+      page,
+      pageSize,
+    };
   }
 }

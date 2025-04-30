@@ -5,11 +5,12 @@ meta {
 }
 
 get {
-  url: {{base_url}}/audit-log/me?maxListSize=3
+  url: {{base_url}}/audit-log/me?page=2&pageSize=10
   body: none
   auth: inherit
 }
 
 params:query {
-  maxListSize: 3
+  page: 2
+  pageSize: 10
 }

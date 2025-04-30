@@ -10,10 +10,11 @@ export class AuditLogService {
     private readonly createAuditLogUseCase: CreateAuditLogUseCase,
   ) {}
 
-  async getAuditLogsByUserId(user_id: string, maxListSize: number) {
+  async getAuditLogsByUserId(user_id: string, pageSize: number, page: number) {
     return await this.listAuditLogsByUserIdUseCase.execute(
       user_id,
-      maxListSize,
+      pageSize,
+      page,
     );
   }
 
