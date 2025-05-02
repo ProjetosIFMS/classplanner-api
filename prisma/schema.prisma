@@ -22,6 +22,7 @@ model User {
   Dayoff              Dayoff?
   AuditLog            AuditLog[]
   ProfessorInterest   ProfessorInterest[]
+  SystemConfig        SystemConfig[]
 
   @@index([area_id])
 }
@@ -82,7 +83,7 @@ model Discipline {
   Modality               Modality[]
   DisciplineModality     DisciplineModality[]
   ClassGrade             ClassGradeDiscipline[]
-  interestedProfessors   ProfessorInterest[]    
+  interestedProfessors   ProfessorInterest[]
 
   @@index([area_id])
   @@index([pedagogical_project_id])
@@ -184,16 +185,24 @@ model AuditLog {
 }
 
 model ProfessorInterest {
-  id          String          @id @unique @default(uuid())
-  user_id         String       
-  discipline_id   String
-  created_at      DateTime         @default(now())
-  status          INTEREST_STATUS  @default(PENDING)
-  Professor       User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  Discipline      Discipline       @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
+  id            String          @id @unique @default(uuid())
+  user_id       String
+  discipline_id String
+  created_at    DateTime        @default(now())
+  status        INTEREST_STATUS @default(PENDING)
+  Professor     User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  Discipline    Discipline      @relation(fields: [discipline_id], references: [id], onDelete: Cascade)
 
   @@unique([user_id, discipline_id])
+}
 
+model SystemConfig {
+  id                                   String                    @id @unique @default("singleton")
+  discipline_selection_mode            DISCIPLINE_SELECTION_MODE @default(NONE)
+  discipline_selection_mode_expires_at DateTime?
+  updated_at                           DateTime                  @updatedAt
+  updated_by                           String?
+  User                                 User?                     @relation(fields: [updated_by], references: [id])
 }
 
 enum ROLE {
@@ -218,7 +227,6 @@ enum WEEKDAY {
   SUNDAY
 }
 
-
 enum INTEREST_STATUS {
   ACTIVE
   INACTIVE
@@ -230,4 +238,10 @@ enum AUDITLOG_ACTION {
   CREATE
   UPDATE
   DELETE
+}
+
+enum DISCIPLINE_SELECTION_MODE {
+  INTEREST
+  SELECTION
+  NONE
 }
