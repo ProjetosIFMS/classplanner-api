@@ -1,0 +1,27 @@
+FROM node:20
+
+WORKDIR /app
+
+# Criar o diretório node_modules e ajustar as permissões
+RUN mkdir -p /app/node_modules && \
+    chown -R node:node /app && \
+    chmod -R 755 /app
+
+USER node
+
+COPY --chown=node:node package*.json ./
+RUN npm install
+
+COPY --chown=node:node . .
+
+# Criar script de inicialização
+RUN echo '#!/bin/sh\n\
+    echo "Running database migrations..."\n\
+    npx prisma generate\n\
+    npx prisma migrate deploy\n\
+    echo "Starting application..."\n\
+    npm run start:dev' > /app/start.sh && chmod +x /app/start.sh
+
+EXPOSE 3000
+
+CMD ["/app/start.sh"] 
