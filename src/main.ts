@@ -7,7 +7,13 @@ import { Reflector } from '@nestjs/core';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalGuards(new RolesGuard(new Reflector()));
-  app.enableCors();
+  app.enableCors({
+    origin: [process.env.FRONTEND_URL || 'http://localhost:3001'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: '*',
+    maxAge: 3600,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Class Planner IFMS')
