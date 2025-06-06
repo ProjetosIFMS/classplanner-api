@@ -11,7 +11,13 @@ async function bootstrap() {
     origin: [process.env.FRONTEND_URL || 'http://localhost:3001'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
-    allowedHeaders: '*',
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Accept',
+      'X-Custom-Header',
+    ],
+    exposedHeaders: ['Content-Disposition', 'X-Total-Count', 'Content-Range'],
     maxAge: 3600,
   });
 
