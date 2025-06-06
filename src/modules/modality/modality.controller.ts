@@ -6,21 +6,21 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
 import { ModalityService } from './modality.service';
 import { CreateModalityDto } from './dto/create-modality.dto';
 import { UpdateModalityDto } from './dto/update-modality.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from '../user/dto/Role';
+// import { AuthGuard } from '@nestjs/passport';
+// import { RolesGuard } from 'src/guards/roles.guard';
+// import { Roles } from 'src/decorators/roles.decorator';
+// import { Role } from '../user/dto/Role';
 
 @ApiTags('Modality')
 @Controller('modality')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR)
 export class ModalityController {
   constructor(private readonly modalityService: ModalityService) {}
 
@@ -30,7 +30,7 @@ export class ModalityController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  // @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAll() {
     return this.modalityService.findAll();
   }

@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
   Query,
   Req,
   DefaultValuePipe,
@@ -15,28 +15,28 @@ import { DayoffService } from './dayoff.service';
 import { CreateDayoffDto } from './dto/create-dayoff.dto';
 import { UpdateDayoffDto } from './dto/update-dayoff.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Role } from 'src/modules/user/dto/Role';
-import { Roles } from 'src/decorators/roles.decorator';
+// import { AuthGuard } from '@nestjs/passport';
+// import { RolesGuard } from 'src/guards/roles.guard';
+// import { Role } from 'src/modules/user/dto/Role';
+// import { Roles } from 'src/decorators/roles.decorator';
 import { DAYOFF_STATUS } from 'src/modules/dayoff/dto/dayoff-status';
 import { WEEKDAY } from 'src/modules/dayoff/dto/weekday';
 
 @ApiTags('Dayoff')
 @Controller('dayoff')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR, Role.PROFESSOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR, Role.PROFESSOR)
 export class DayoffController {
   constructor(private readonly dayoffService: DayoffService) {}
 
   @Post()
-  @Roles(Role.PROFESSOR)
+  // @Roles(Role.PROFESSOR)
   createDayoff(@Body() createDayoffDto: CreateDayoffDto, @Req() req: any) {
     return this.dayoffService.createDayoff(req.user.id, createDayoffDto);
   }
 
   @Get()
-  @Roles(Role.COORDINATOR)
+  // @Roles(Role.COORDINATOR)
   findAllDayoffs(
     @Query('status', new DefaultValuePipe('')) status: DAYOFF_STATUS | '',
     @Query('weekday', new DefaultValuePipe('')) weekday: WEEKDAY | '',
@@ -45,7 +45,7 @@ export class DayoffController {
   }
 
   @Get('professor/:user_id')
-  @Roles(Role.COORDINATOR)
+  // @Roles(Role.COORDINATOR)
   findDayoffByUserId(@Param('user_id') user_id: string) {
     return this.dayoffService.findDayoffByUserId(user_id);
   }
@@ -56,37 +56,37 @@ export class DayoffController {
   }
 
   @Get(':id')
-  @Roles(Role.COORDINATOR)
+  // @Roles(Role.COORDINATOR)
   findDayoffById(@Param('id') id: string) {
     return this.dayoffService.findDayoffById(id);
   }
 
   @Patch()
-  @Roles(Role.PROFESSOR)
+  // @Roles(Role.PROFESSOR)
   updateDayoff(@Body() updateDayoffDto: UpdateDayoffDto, @Req() req: any) {
     return this.dayoffService.updateDayoff(req.user.id, updateDayoffDto);
   }
 
   @Patch(':id/approve')
-  @Roles(Role.COORDINATOR)
+  // @Roles(Role.COORDINATOR)
   approveDayoff(@Param('id') id: string) {
     return this.dayoffService.approveDayoff(id);
   }
 
   @Patch(':id/reject')
-  @Roles(Role.COORDINATOR)
+  // @Roles(Role.COORDINATOR)
   rejectDayoff(@Param('id') id: string) {
     return this.dayoffService.rejectDayoff(id);
   }
 
   @Delete('me')
-  @Roles(Role.PROFESSOR)
+  // @Roles(Role.PROFESSOR)
   deleteMyDayoff(@Req() req: any) {
     return this.dayoffService.DeleteMyDayoff(req.user.id);
   }
 
   @Delete(':id')
-  @Roles(Role.COORDINATOR)
+  // @Roles(Role.COORDINATOR)
   deleteDayoff(@Param('id') id: string) {
     return this.dayoffService.deleteDayoff(id);
   }

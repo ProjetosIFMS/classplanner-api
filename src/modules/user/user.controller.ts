@@ -6,23 +6,23 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
   Req,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDTO } from './dto/create-user.dto';
-import { AuthGuard } from '@nestjs/passport';
-import { Role } from './dto/Role';
-import { Roles } from '../../decorators/roles.decorator';
-import { RolesGuard } from '../../guards/roles.guard';
+// import { AuthGuard } from '@nestjs/passport';
+// import { Role } from './dto/Role';
+// import { Roles } from '../../decorators/roles.decorator';
+// import { RolesGuard } from '../../guards/roles.guard';
 import { UpdateUserAreaDto } from './dto/update-user-area.dto';
 
 @ApiTags('User')
 @Controller('user')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -32,7 +32,7 @@ export class UserController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  // @Roles(Role.PROFESSOR, Role.COORDINATOR)
   async findAll() {
     return await this.userService.findAll();
   }
@@ -48,7 +48,7 @@ export class UserController {
   }
 
   @Patch('select-area')
-  @Roles(Role.PROFESSOR)
+  // @Roles(Role.PROFESSOR)
   async updateUserArea(
     @Req() req,
     @Body() updateUserAreaDto: UpdateUserAreaDto,

@@ -6,21 +6,21 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
 import { AreaService } from './area.service';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../../guards/roles.guard';
-import { Roles } from '../../decorators/roles.decorator';
-import { Role } from '../user/dto/Role';
+// import { AuthGuard } from '@nestjs/passport';
+// import { RolesGuard } from '../../guards/roles.guard';
+// import { Roles } from '../../decorators/roles.decorator';
+// import { Role } from '../user/dto/Role';
 
 @ApiTags('area')
 @Controller('area')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR)
 export class AreaController {
   constructor(private readonly areaService: AreaService) {}
 
@@ -30,7 +30,7 @@ export class AreaController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  // @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAllAreas() {
     return this.areaService.findAllAreas();
   }
@@ -51,7 +51,7 @@ export class AreaController {
   }
 
   @Get(':id/professors')
-  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  // @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAllProfessorsFromAreaById(@Param('id') id: string) {
     return this.areaService.findAllProfessorsFromAreaById(id);
   }

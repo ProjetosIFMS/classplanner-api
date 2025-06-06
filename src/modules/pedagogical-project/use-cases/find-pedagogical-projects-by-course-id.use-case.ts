@@ -20,10 +20,7 @@ export class FindPedagogicalProjectsByCourseIdUseCase {
       const courseExists =
         await this.findCourseByIdRepository.findCourseById(course_id);
       if (!courseExists) {
-        throw new NotFoundException(
-          'Course not found',
-          FindPedagogicalProjectsByCourseIdUseCase.name,
-        );
+        throw new NotFoundException('Course not found');
       }
       const pedagogicalProjects =
         await this.findPedagogicalProjectsByCourseIdRepository.findPedagogicalProjectsByCourseId(
