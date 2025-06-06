@@ -7,20 +7,20 @@ import {
   Param,
   Patch,
   Post,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from '../user/dto/Role';
+// import { AuthGuard } from '@nestjs/passport';
+// import { RolesGuard } from 'src/guards/roles.guard';
+// import { Roles } from 'src/decorators/roles.decorator';
+// import { Role } from '../user/dto/Role';
 import { ClassgradeDisciplineService } from './classgrade-discipline.service';
 import { CreateClassgradeDisciplineDto } from './dto/create-classgrade-discipline.dto';
 import { UpdateClassgradeDisciplineDto } from './dto/update-classgrade-discipline.dto';
 
 @ApiTags('classgrade-discipline')
 @Controller('classgrade-discipline')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR)
 export class ClassgradeDisciplineController {
   constructor(
     private readonly classgradeDisciplineService: ClassgradeDisciplineService,
@@ -45,7 +45,7 @@ export class ClassgradeDisciplineController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR)
+  // @Roles(Role.PROFESSOR)
   findAll() {
     return this.classgradeDisciplineService.findAllClassgradeDisciplines();
   }

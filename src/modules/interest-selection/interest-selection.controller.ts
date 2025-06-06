@@ -6,18 +6,18 @@ import {
   Patch,
   Param,
   Req,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
 import { InterestSelectionService } from './interest-selection.service';
 import { CreateInterestSelectionDto } from './dto/create-interest-selection.dto';
 import { UpdateInterestSelectionDto } from './dto/update-interest-selection.dto';
-import { DisciplineSelectionGuard } from 'src/guards/discipline-selection-guard';
-import { RequiresDisciplineMode } from 'src/decorators/discipline-selection-mode';
-import { DISCIPLINE_SELECTION_MODE } from '@prisma/client';
+// import { DisciplineSelectionGuard } from 'src/guards/discipline-selection-guard';
+// import { RequiresDisciplineMode } from 'src/decorators/discipline-selection-mode';
+// import { DISCIPLINE_SELECTION_MODE } from '@prisma/client';
 
 @Controller('interest-selection')
-@UseGuards(DisciplineSelectionGuard)
-@RequiresDisciplineMode(DISCIPLINE_SELECTION_MODE.INTEREST)
+// @UseGuards(DisciplineSelectionGuard)
+// @RequiresDisciplineMode(DISCIPLINE_SELECTION_MODE.INTEREST)
 export class InterestSelectionController {
   constructor(
     private readonly interestSelectionService: InterestSelectionService,

@@ -6,21 +6,21 @@ import {
   Param,
   Patch,
   Post,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
-import { Roles } from 'src/decorators/roles.decorator';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Role } from 'src/modules/user/dto/Role';
+// import { Roles } from 'src/decorators/roles.decorator';
+// import { RolesGuard } from 'src/guards/roles.guard';
+// import { Role } from 'src/modules/user/dto/Role';
 import { ProfessorClassgradeService } from './professor-classgrade.service';
 import { CreateProfessorClassGradeDto } from './dto/create-professor-classgrade.dto';
 import { UpdateProfessorClassgradeDto } from './dto/update-professor-classgrade.dto';
 
 @ApiTags('professor-classgrade')
 @Controller('professor-classgrade')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR)
 export class ProfessorClassgradeController {
   constructor(
     private readonly professorClassgradeService: ProfessorClassgradeService,

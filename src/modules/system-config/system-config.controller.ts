@@ -1,14 +1,14 @@
-import { Controller, Get, Body, Patch, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Req } from '@nestjs/common';
 import { SystemConfigService } from './system-config.service';
 import { UpdateSystemConfigDto } from './dto/update-system-config.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'prisma/seed';
+// import { AuthGuard } from '@nestjs/passport';
+// import { RolesGuard } from 'src/guards/roles.guard';
+// import { Roles } from 'src/decorators/roles.decorator';
+// import { Role } from 'prisma/seed';
 
 @ApiTags('system-config')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Controller('system-config')
 export class SystemConfigController {
   constructor(private readonly systemConfigService: SystemConfigService) {}
@@ -18,7 +18,7 @@ export class SystemConfigController {
     return await this.systemConfigService.findSystemConfig();
   }
 
-  @Roles(Role.COORDINATOR)
+  // @Roles(Role.COORDINATOR)
   @Patch()
   async updateSystemConfig(
     @Body() updateSystemConfigDto: UpdateSystemConfigDto,

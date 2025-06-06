@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
   Query,
   ParseBoolPipe,
   DefaultValuePipe,
@@ -15,15 +15,15 @@ import { DisciplineService } from './discipline.service';
 import { CreateDisciplineDto } from './dto/create-discipline.dto';
 import { UpdateDisciplineDto } from './dto/update-discipline.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from '../user/dto/Role';
+// import { AuthGuard } from '@nestjs/passport';
+// import { RolesGuard } from 'src/guards/roles.guard';
+// import { Roles } from 'src/decorators/roles.decorator';
+// import { Role } from '../user/dto/Role';
 
 @ApiTags('Discipline')
 @Controller('discipline')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR)
 export class DisciplineController {
   constructor(private readonly disciplineService: DisciplineService) {}
 
@@ -33,7 +33,7 @@ export class DisciplineController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  // @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAll(
     @Query('includeModalities', new DefaultValuePipe(false), ParseBoolPipe)
     includeModalities: boolean,

@@ -6,21 +6,21 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
 import { PedagogicalProjectService } from './pedagogical-project.service';
 import { CreatePedagogicalProjectDto } from './dto/create-pedagogical-project.dto';
 import { UpdatePedagogicalProjectDto } from './dto/update-pedagogical-project.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from '../user/dto/Role';
+// import { AuthGuard } from '@nestjs/passport';
+// import { RolesGuard } from 'src/guards/roles.guard';
+// import { Roles } from 'src/decorators/roles.decorator';
+// import { Role } from '../user/dto/Role';
 
 @ApiTags('Pedagogical Project')
 @Controller('pedagogical-project')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
-@Roles(Role.COORDINATOR)
+// @UseGuards(AuthGuard('jwt'), RolesGuard)
+// @Roles(Role.COORDINATOR)
 export class PedagogicalProjectController {
   constructor(
     private readonly pedagogicalProjectService: PedagogicalProjectService,
@@ -36,13 +36,13 @@ export class PedagogicalProjectController {
   }
 
   @Get()
-  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  // @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findAllPedagogicalProjects() {
     return this.pedagogicalProjectService.findAllPedagogicalProjects();
   }
 
-  @Get(':course_id')
-  @Roles(Role.PROFESSOR, Role.COORDINATOR)
+  @Get('course/:course_id')
+  // @Roles(Role.PROFESSOR, Role.COORDINATOR)
   findPedagogicalProjectsByCourseId(@Param('course_id') course_id: string) {
     return this.pedagogicalProjectService.findPedagogicalProjectsByCourseId(
       course_id,
@@ -64,7 +64,7 @@ export class PedagogicalProjectController {
       updatePedagogicalProjectDto,
     );
   }
-  @Roles(Role.COORDINATOR, Role.ADMIN)
+  // @Roles(Role.COORDINATOR, Role.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.pedagogicalProjectService.deletePedagogicalProject(id);
